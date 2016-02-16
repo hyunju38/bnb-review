@@ -94,17 +94,8 @@ $app->register(Dingo\Api\Provider\LumenServiceProvider::class);
 |
 */
 
-$app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
-    require __DIR__.'/../app/Http/routes.php';
+$app->group([], function () use ($app) {
+    require __DIR__.'/../app/Api/V1/routes.php';
 });
-
-// $api = app('Dingo\Api\Routing\Router');
-// $api->version('v1', function ($api) {
-//     echo 'route..';
-//     $api->get('collections/{collection}', 'App\Api\V1\Controllers\CollectionsController@show');
-//     // $api->get('collections/{collection}', function () {
-//     //     return 'test';
-//     // });
-// });
 
 return $app;
