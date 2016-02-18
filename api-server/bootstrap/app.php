@@ -25,6 +25,9 @@ $app = new Laravel\Lumen\Application(
 
 $app->withFacades();
 
+// $app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
+$app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
+
 $app->withEloquent();
 
 /*
@@ -79,6 +82,9 @@ $app->singleton(
 */
 
 $app->register(Dingo\Api\Provider\LumenServiceProvider::class);
+$app->register(Barryvdh\Cors\LumenServiceProvider::class);
+
+
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
