@@ -9,6 +9,11 @@ class Product extends Eloquent
 {
     protected $connection = 'mongodb';
 
+    public function reviews()
+    {
+        return $this->hasMany('App\Api\V1\Models\Review');
+    }
+
     // /**
     //  *  Indicates if the model should be timestamped.
     //  *

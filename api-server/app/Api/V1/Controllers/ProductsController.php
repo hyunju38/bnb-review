@@ -2,17 +2,31 @@
 
 namespace App\Api\V1\Controllers;
 
-use App\Api\V1\Models\Product;
+use App\Api\V1\Models\{Product, Review};
 use App\Api\V1\Transformers\ProductTransformer;
 
 use Illuminate\Http\Request;
+use League\Fractal\TransformerAbstract;
 
 class ProductsController extends ApiController
 {
     public function show()
     {
         $products = Product::all();
-        return $this->response->collection($products, new ProductTransformer);
+
+        foreach ($products as $index => $product) {
+            $products[$index]['reviews'] = $product->reviews;
+        }
+
+        return $this->response->collection(
+            $products,
+            new class extends TransformerAbstract {
+                public function transform(Product $products)
+                {
+                    return $products;
+                }
+            }
+        );
     }
 
     public function store(Request $request)
@@ -32,38 +46,16 @@ class ProductsController extends ApiController
         ];
     }
 
-    // public function update(Request $request, $id)
-    // {
-    //     $product = Product::find(intval($id));
-    //     $product->name = $request['name'];
-    //     $product->desc = $request['desc'];
-    //     $product->reviews = $this->_reviewsTransformer($request['reviews']);    // string -> int
-    //     $product->save();
-    //
-    //     return [
-    //         'status' => 202,
-    //         'messages' => 'PUT request success',
-    //         'updatedData' => $product
-    //     ];
-    // }
-    //
-    // public function destroy(Request $request, $id)
-    // {
-    //     $product = Product::find(intval($id));
-    //     $product->delete();
-    //
-    //     return [
-    //         'status' => 203,
-    //         'messages' => 'DELETE success'
-    //     ];
-    // }
-    //
-    // private function _reviewsTransformer(array $reviews)
-    // {
-    //     $transformedReviews = [];
-    //     foreach ($reviews as $reviewId) {
-    //         array_push($transformedReviews, intVal($reviewId));
-    //     }
-    //     return $transformedReviews;
-    // }
+    public function _reviewTransform($reviews)
+    {
+        $additionalInfomationReviews = [];
+
+        foreach ($reviews as $reviewId) {
+            $review = Review::find(intval($reviewId));
+            array_push($additionalInfomationReviews, $review);
+        }
+
+        return $additionalInfomationReviews;
+    }
+
 }
