@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run test -- --watch & npm run dev:build && node server.js",
+    "dev": "npm run test -- --watch & npm run dev:build && npm run dev:server",
     "dev:build": "webpack && webpack --config webpack.node.config.js",
+    "dev:server": "node server.js",
     "test": "BABEL_ENV=test mocha"
   },
   "author": "",
@@ -21,6 +22,8 @@
     "passport-local": "^1.0.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
+    "redux": "^3.3.1",
+    "redux-thunk": "^1.0.3",
     "xss-filters": "^1.2.6"
   },
   "devDependencies": {
