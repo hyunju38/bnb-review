@@ -22,6 +22,7 @@
     "passport-local": "^1.0.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
+    "react-redux": "^4.4.0",
     "redux": "^3.3.1",
     "redux-thunk": "^1.0.3",
     "xss-filters": "^1.2.6"
@@ -38,6 +39,7 @@
     "ignore-styles": "^1.2.0",
     "mocha": "^2.4.5",
     "node-sass": "^3.4.2",
+    "react-addons-test-utils": "^0.14.7",
     "sass-loader": "^3.1.2",
     "webpack": "^1.12.13"
   }

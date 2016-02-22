@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 
+import * as ActionsType from '../actions/ActionsCreator';
+
 const review = (state = {}, action) => {
     let reviewsIndex = -1;
     switch (action.type) {
-        case 'ADD_REVIEW':
+        case ActionsType.ADD_REVIEW:
             return {
                 _id: action._id,
                 comment: action.comment,
@@ -11,7 +13,7 @@ const review = (state = {}, action) => {
                 product_id: action.product_id,
                 user_id: action.user_id
             };
-        case 'UPDATE_REVIEW':
+        case ActionsType.UPDATE_REVIEW:
             return Object.assign({}, state, {
                 comment: action.comment,
                 score: action.score
@@ -24,12 +26,12 @@ const review = (state = {}, action) => {
 const reviews = (state = [], action) => {
     let reviewsIndex = -1;
     switch (action.type) {
-        case 'ADD_REVIEW':
+        case ActionsType.ADD_REVIEW:
             return [
                 ...state,
                 review(null, action)
             ];
-        case 'UPDATE_REVIEW':
+        case ActionsType.UPDATE_REVIEW:
             reviewsIndex = -1;
             state.forEach((review, index) => {
                 if (review._id === action.id) {
@@ -46,7 +48,7 @@ const reviews = (state = [], action) => {
                 review(state[reviewsIndex], action),
                 ...state.slice(reviewsIndex + 1)
             ];
-        case 'REMOVE_REVIEW':
+        case ActionsType.REMOVE_REVIEW:
             return state.filter((review) => {
                 return review._id !== action.id
             });
@@ -57,15 +59,15 @@ const reviews = (state = [], action) => {
 
 const products = (state = [], action) => {
     switch (action.type) {
-        case 'REQUEST_PRODUCTS':
+        case ActionsType.REQUEST_PRODUCTS:
             // spin ...
             return state;
-        case 'RECIEVE_PRODUCTS':
+        case ActionsType.RECIEVE_PRODUCTS:
             return action.products;
-        case 'RECIEVE_ERROR':
+        case ActionsType.RECIEVE_ERROR:
             // throw error...
             return state;
-        case 'ADD_REVIEW':
+        case ActionsType.ADD_REVIEW:
             const maxId = state.reduce((prevMaxId, curProduct) => {
                 const maxReviewId = curProduct.reviews
                                     .reduce((prevReviewId, curReview) => {
@@ -83,8 +85,8 @@ const products = (state = [], action) => {
                 }
                 return product;
             });
-        case 'UPDATE_REVIEW':
-        case 'REMOVE_REVIEW':
+        case ActionsType.UPDATE_REVIEW:
+        case ActionsType.REMOVE_REVIEW:
             return state.map((product) => {
                 return Object.assign({}, product, {
                     reviews: reviews(product.reviews, action)
