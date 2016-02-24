@@ -1,24 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { addReview } from '../actions/ActionsCreator';
-
-const ReviewInput = ({ selectedProduct, dispatch }) => {
+const ReviewInput = ({
+    onClick
+}) => {
     let inputNumber, textarea;
     return(
         <div>
-            <textarea ref={(node) => { textarea = node }}/>
-            <input type="number" ref={(node) => { inputNumber = node }}/>
-            <button onClick={() => {
-                dispatch(addReview(
-                    textarea.value,
-                    inputNumber.value,
-                    selectedProduct._id,
-                    1
-                ));
-                textarea.value = '';
-                inputNumber.value = '';
-            }}>리뷰 등록</button>
+            <textarea ref={(node) => { textarea = node }} />
+            <input type="number" ref={(node) => { inputNumber = node }} />
+            <button onClick={() => { onClick(textarea, inputNumber); }} >
+                리뷰 등록
+            </button>
         </div>
     );
 };
@@ -26,4 +19,25 @@ const ReviewInput = ({ selectedProduct, dispatch }) => {
 //     store: React.PropTypes.object
 // };
 // ReviewInput = connect()(ReviewInput);
-export default connect()(ReviewInput);
+
+// const mapDispatchToReviewInputProps = (dispatch, ownProps) => {
+//     return {
+//         onAddReviewButtonClick: () => {
+//             dispatch(addReview(
+//                 textarea.value,
+//                 inputNumber.value,
+//                 ownProps.selectedProduct._id,
+//                 1
+//             ));
+//             textarea.value = '';
+//             inputNumber.value = '';
+//         }
+//     };
+// };
+//
+// export default connect(
+//     null,
+//     mapDispatchToReviewInputProps
+// )(ReviewInput);
+
+export default ReviewInput;

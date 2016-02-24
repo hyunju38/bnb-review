@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ProductSearch from '../components/ProductSearch';
+import ProductSearch from './ProductSearch';
 import ProductList from './ProductList';
 import Side from './Side';
 

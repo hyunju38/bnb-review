@@ -13,7 +13,7 @@ const selectedProduct = (id) => {
 const setKeyword = (keyword) => {
     return {
         type: SET_KEYWORD,
-        keywordå
+        keyword
     };
 };
 

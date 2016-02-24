@@ -6,7 +6,7 @@ import products from '../actions/products';
 
 import ProductItem from '../components/ProductItem';
 
-class ProductList extends Component {
+export class ProductList extends Component {
 
     // constructor(props){
     //     super(props);

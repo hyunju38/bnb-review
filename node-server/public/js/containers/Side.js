@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { addReview, removeReview } from '../actions/ActionsCreator';
+
 import ProductInfo from '../components/ProductInfo';
 import ReviewInput from '../components/ReviewInput';
 import ReviewList from '../components/ReviewList';
 
 // let Side = (props = {}, { store }) => {
-class Side extends Component {
+export class Side extends Component {
 
     // componentDidMount(){
     //     const { store } = this.context;
@@ -18,15 +20,17 @@ class Side extends Component {
     // }
 
     render(){
-        const { selectedProduct } = this.props;
+        const { onAddReviewButtonClick, onRemoveReviewButtonClick, selectedProduct } = this.props;
         return(
             <div>
                 {
                 selectedProduct ?
                     <aside>
                         <ProductInfo selectedProduct={selectedProduct} />
-                        <ReviewInput selectedProduct={selectedProduct} />
-                        <ReviewList selectedProduct={selectedProduct} />
+                        <ReviewInput onClick={onAddReviewButtonClick(selectedProduct._id)} />
+                        <ReviewList onClick={onRemoveReviewButtonClick}
+                            selectedProduct={selectedProduct}
+                        />
                     </aside>
                     :
                     null
@@ -47,5 +51,26 @@ const mapStateToSideProps = (state) => {
     };
 };
 
+const mapDispatchToSideProps = (dispatch, ownProps) => {
+    return {
+        onAddReviewButtonClick: (productId) => (textarea, inputNumber) => {
+            dispatch(addReview(
+                textarea.value || '',
+                inputNumber.value || 0,
+                productId,
+                1
+            ));
+            textarea.value = '';
+            inputNumber.value = '';
+        },
+        onRemoveReviewButtonClick: (id) => {
+            dispatch(removeReview(id));
+        }
+    };
+};
+
 // const VisibleSide = connect(mapStateToSideProps)(Side);
-export default connect(mapStateToSideProps)(Side);
+export default connect(
+    mapStateToSideProps,
+    mapDispatchToSideProps
+)(Side);
