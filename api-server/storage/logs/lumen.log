@@ -3437,3 +3437,126 @@ Stack trace:
 #41 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(327): Laravel\Lumen\Application->dispatch(NULL)
 #42 /Users/yellotravel/nginx-work/pension-review/api-server/public/index.php(28): Laravel\Lumen\Application->run()
 #43 {main}  
+[2016-02-22 05:17:26] lumen.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Trait 'Lukasoppermann\Testing\TestTrait' not found in /Users/yellotravel/nginx-work/pension-review/api-server/tests/TestCase.php:11
+Stack trace:
+#0 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(55): Laravel\Lumen\Application->handleShutdown()
+#1 [internal function]: Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}()
+#2 {main}  
+[2016-02-22 05:17:52] lumen.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Trait 'Lukasoppermann\Testing\TestTrait' not found in /Users/yellotravel/nginx-work/pension-review/api-server/tests/TestCase.php:11
+Stack trace:
+#0 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(55): Laravel\Lumen\Application->handleShutdown()
+#1 [internal function]: Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}()
+#2 {main}  
+[2016-02-22 05:18:30] lumen.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Cannot declare class TestCase, because the name is already in use in /Users/yellotravel/nginx-work/pension-review/api-server/tests/TestCase.php:9
+Stack trace:
+#0 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(55): Laravel\Lumen\Application->handleShutdown()
+#1 [internal function]: Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}()
+#2 {main}  
+[2016-02-22 05:19:36] lumen.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Class 'TestCases' not found in /Users/yellotravel/nginx-work/pension-review/api-server/tests/CollectionTest.php:6
+Stack trace:
+#0 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(55): Laravel\Lumen\Application->handleShutdown()
+#1 [internal function]: Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}()
+#2 {main}  
+[2016-02-22 05:23:00] lumen.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Cannot declare class TestCases, because the name is already in use in /Users/yellotravel/nginx-work/pension-review/api-server/tests/TestCase.php:9
+Stack trace:
+#0 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(55): Laravel\Lumen\Application->handleShutdown()
+#1 [internal function]: Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}()
+#2 {main}  
+[2016-02-22 05:23:31] lumen.ERROR: ErrorException: include(/Users/yellotravel/nginx-work/pension-review/api-server/tests/TestCase.php): failed to open stream: No such file or directory in /Users/yellotravel/nginx-work/pension-review/api-server/vendor/composer/ClassLoader.php:412
+Stack trace:
+#0 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/composer/ClassLoader.php(412): Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}(2, 'include(/Users/...', '/Users/yellotra...', 412, Array)
+#1 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/composer/ClassLoader.php(412): include()
+#2 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/Users/yellotra...')
+#3 [internal function]: Composer\Autoload\ClassLoader->loadClass('TestCase')
+#4 /Users/yellotravel/nginx-work/pension-review/api-server/tests/CollectionTest.php(6): spl_autoload_call('TestCase')
+#5 phar:///usr/local/bin/phpunit/phpunit/Util/Fileloader.php(56): include_once('/Users/yellotra...')
+#6 phar:///usr/local/bin/phpunit/phpunit/Util/Fileloader.php(40): PHPUnit_Util_Fileloader::load('/Users/yellotra...')
+#7 phar:///usr/local/bin/phpunit/phpunit/Framework/TestSuite.php(339): PHPUnit_Util_Fileloader::checkAndLoad('/Users/yellotra...')
+#8 phar:///usr/local/bin/phpunit/phpunit/Framework/TestSuite.php(411): PHPUnit_Framework_TestSuite->addTestFile('/Users/yellotra...')
+#9 phar:///usr/local/bin/phpunit/phpunit/Util/Configuration.php(938): PHPUnit_Framework_TestSuite->addTestFiles(Array)
+#10 phar:///usr/local/bin/phpunit/phpunit/Util/Configuration.php(851): PHPUnit_Util_Configuration->getTestSuite(Object(DOMElement), NULL)
+#11 phar:///usr/local/bin/phpunit/phpunit/TextUI/Command.php(623): PHPUnit_Util_Configuration->getTestSuiteConfiguration(NULL)
+#12 phar:///usr/local/bin/phpunit/phpunit/TextUI/Command.php(113): PHPUnit_TextUI_Command->handleArguments(Array)
+#13 phar:///usr/local/bin/phpunit/phpunit/TextUI/Command.php(103): PHPUnit_TextUI_Command->run(Array, true)
+#14 /usr/local/bin/phpunit(537): PHPUnit_TextUI_Command::main()
+#15 {main}  
+[2016-02-22 05:23:52] lumen.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Cannot declare class TestCase, because the name is already in use in /Users/yellotravel/nginx-work/pension-review/api-server/tests/TestCase.php:9
+Stack trace:
+#0 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(55): Laravel\Lumen\Application->handleShutdown()
+#1 [internal function]: Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}()
+#2 {main}  
+[2016-02-22 05:24:14] lumen.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Cannot declare class TestCase, because the name is already in use in /Users/yellotravel/nginx-work/pension-review/api-server/tests/TestCase.php:9
+Stack trace:
+#0 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(55): Laravel\Lumen\Application->handleShutdown()
+#1 [internal function]: Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}()
+#2 {main}  
+[2016-02-22 05:26:47] lumen.ERROR: Symfony\Component\Debug\Exception\FatalErrorException: Cannot declare class TestCase1, because the name is already in use in /Users/yellotravel/nginx-work/pension-review/api-server/tests/TestCase.php:9
+Stack trace:
+#0 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Concerns/RegistersExceptionHandlers.php(55): Laravel\Lumen\Application->handleShutdown()
+#1 [internal function]: Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}()
+#2 {main}  
+[2016-02-25 06:53:21] lumen.ERROR: Symfony\Component\HttpKernel\Exception\NotFoundHttpException in /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:442
+Stack trace:
+#0 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(380): Laravel\Lumen\Application->handleDispatcherResponse(Array)
+#1 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(624): Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}()
+#2 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(382): Laravel\Lumen\Application->sendThroughPipeline(Array, Object(Closure))
+#3 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/dingo/api/src/Routing/Adapter/Lumen.php(103): Laravel\Lumen\Application->dispatch(Object(Dingo\Api\Http\Request))
+#4 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/dingo/api/src/Routing/Router.php(558): Dingo\Api\Routing\Adapter\Lumen->dispatch(Object(Dingo\Api\Http\Request), 'v1')
+#5 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/dingo/api/src/Http/Middleware/Request.php(110): Dingo\Api\Routing\Router->dispatch(Object(Dingo\Api\Http\Request))
+#6 [internal function]: Dingo\Api\Http\Middleware\Request->Dingo\Api\Http\Middleware\{closure}(Object(Dingo\Api\Http\Request))
+#7 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/illuminate/pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Dingo\Api\Http\Request))
+#8 [internal function]: Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Dingo\Api\Http\Request))
+#9 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/illuminate/pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Dingo\Api\Http\Request))
+#10 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/dingo/api/src/Http/Middleware/Request.php(111): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#11 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/dingo/api/src/Http/Middleware/Request.php(89): Dingo\Api\Http\Middleware\Request->sendRequestThroughRouter(Object(Dingo\Api\Http\Request))
+#12 [internal function]: Dingo\Api\Http\Middleware\Request->handle(Object(Dingo\Api\Http\Request), Object(Closure))
+#13 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/illuminate/pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#14 [internal function]: Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#15 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Routing/Pipeline.php(32): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#16 [internal function]: Laravel\Lumen\Routing\Pipeline->Laravel\Lumen\Routing\{closure}(Object(Illuminate\Http\Request))
+#17 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/illuminate/pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#18 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(621): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#19 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(382): Laravel\Lumen\Application->sendThroughPipeline(Array, Object(Closure))
+#20 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(327): Laravel\Lumen\Application->dispatch(NULL)
+#21 /Users/yellotravel/nginx-work/pension-review/api-server/public/index.php(28): Laravel\Lumen\Application->run()
+#22 {main}  
+[2016-02-25 06:53:21] lumen.ERROR: Symfony\Component\HttpKernel\Exception\NotFoundHttpException in /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php:442
+Stack trace:
+#0 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(380): Laravel\Lumen\Application->handleDispatcherResponse(Array)
+#1 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(624): Laravel\Lumen\Application->Laravel\Lumen\Concerns\{closure}()
+#2 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(382): Laravel\Lumen\Application->sendThroughPipeline(Array, Object(Closure))
+#3 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/dingo/api/src/Routing/Adapter/Lumen.php(103): Laravel\Lumen\Application->dispatch(Object(Dingo\Api\Http\Request))
+#4 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/dingo/api/src/Routing/Router.php(558): Dingo\Api\Routing\Adapter\Lumen->dispatch(Object(Dingo\Api\Http\Request), 'v1')
+#5 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/dingo/api/src/Http/Middleware/Request.php(110): Dingo\Api\Routing\Router->dispatch(Object(Dingo\Api\Http\Request))
+#6 [internal function]: Dingo\Api\Http\Middleware\Request->Dingo\Api\Http\Middleware\{closure}(Object(Dingo\Api\Http\Request))
+#7 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/illuminate/pipeline/Pipeline.php(139): call_user_func(Object(Closure), Object(Dingo\Api\Http\Request))
+#8 [internal function]: Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Dingo\Api\Http\Request))
+#9 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/illuminate/pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Dingo\Api\Http\Request))
+#10 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/dingo/api/src/Http/Middleware/Request.php(111): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#11 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/dingo/api/src/Http/Middleware/Request.php(89): Dingo\Api\Http\Middleware\Request->sendRequestThroughRouter(Object(Dingo\Api\Http\Request))
+#12 [internal function]: Dingo\Api\Http\Middleware\Request->handle(Object(Dingo\Api\Http\Request), Object(Closure))
+#13 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/illuminate/pipeline/Pipeline.php(124): call_user_func_array(Array, Array)
+#14 [internal function]: Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#15 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Routing/Pipeline.php(32): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#16 [internal function]: Laravel\Lumen\Routing\Pipeline->Laravel\Lumen\Routing\{closure}(Object(Illuminate\Http\Request))
+#17 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/illuminate/pipeline/Pipeline.php(102): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#18 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(621): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#19 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(382): Laravel\Lumen\Application->sendThroughPipeline(Array, Object(Closure))
+#20 /Users/yellotravel/nginx-work/pension-review/api-server/vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php(327): Laravel\Lumen\Application->dispatch(NULL)
+#21 /Users/yellotravel/nginx-work/pension-review/api-server/public/index.php(28): Laravel\Lumen\Application->run()
+#22 {main}  
+[2016-02-25 06:55:06] lumen.ERROR: Symfony\Component\Debug\Exception\FatalThrowableError: Type error: Argument 2 passed to TestCase::assertValidArray() must be of the type array, null given, called in /Users/yellotravel/nginx-work/pension-review/api-server/tests/CollectionTest.php on line 31 in /Users/yellotravel/nginx-work/pension-review/api-server/tests/TestTrait.php:16
+Stack trace:
+#0 /Users/yellotravel/nginx-work/pension-review/api-server/tests/CollectionTest.php(31): TestCase->assertValidArray(Array, NULL)
+#1 [internal function]: CollectionTest->get_a_collection_by_name()
+#2 phar:///usr/local/bin/phpunit/phpunit/Framework/TestCase.php(863): ReflectionMethod->invokeArgs(Object(CollectionTest), Array)
+#3 phar:///usr/local/bin/phpunit/phpunit/Framework/TestCase.php(741): PHPUnit_Framework_TestCase->runTest()
+#4 phar:///usr/local/bin/phpunit/phpunit/Framework/TestResult.php(608): PHPUnit_Framework_TestCase->runBare()
+#5 phar:///usr/local/bin/phpunit/phpunit/Framework/TestCase.php(697): PHPUnit_Framework_TestResult->run(Object(CollectionTest))
+#6 phar:///usr/local/bin/phpunit/phpunit/Framework/TestSuite.php(733): PHPUnit_Framework_TestCase->run(Object(PHPUnit_Framework_TestResult))
+#7 phar:///usr/local/bin/phpunit/phpunit/Framework/TestSuite.php(733): PHPUnit_Framework_TestSuite->run(Object(PHPUnit_Framework_TestResult))
+#8 phar:///usr/local/bin/phpunit/phpunit/TextUI/TestRunner.php(432): PHPUnit_Framework_TestSuite->run(Object(PHPUnit_Framework_TestResult))
+#9 phar:///usr/local/bin/phpunit/phpunit/TextUI/Command.php(151): PHPUnit_TextUI_TestRunner->doRun(Object(PHPUnit_Framework_TestSuite), Array)
+#10 phar:///usr/local/bin/phpunit/phpunit/TextUI/Command.php(103): PHPUnit_TextUI_Command->run(Array, true)
+#11 /usr/local/bin/phpunit(537): PHPUnit_TextUI_Command::main()
+#12 {main}  

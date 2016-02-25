@@ -1,7 +1,5 @@
 <?php
 
-// namespace Lukasoppermann\Testing;
-
 use PHPUnit_Framework_Assert as Assertion;
 use Illuminate\Support\Facades\Validator;
 
@@ -35,11 +33,13 @@ trait TestTrait
             // if the attribute has children, do a sub-loop
             } else {
                 $rules[$key] = 'required';
-                if (array_key_exists($rule, $resourceData)) {
+                if (array_key_exists($key, $resourceData)) {
                     $this->validateArray($rule, $resourceData[$key]);
                 }
             }
         }
+
+        // var_dump($rules);
 
         // run validator
         $validator = Validator::make($resourceData, $rules);
