@@ -13,7 +13,7 @@
 
 $factory->define(App\Product::class, function ($faker) {
     return [
-        'name' => $faker->name,
+        'name' => $faker->word,
         'desc' => $faker->text
     ];
 });
@@ -22,6 +22,6 @@ $factory->define(App\Review::class, function ($faker) {
     return [
         'comment' => $faker->text,
         'score' => $faker->numberBetween(1, 5),
-        'user_id' => $faker->randomDigitNotNull
+        'product_id' => App\Product::all()->random()->id
     ];
 });
