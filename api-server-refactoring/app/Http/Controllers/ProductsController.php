@@ -8,7 +8,7 @@ use App\{Product, Review};
 
 class ProductsController extends Controller
 {
-    const UNIT = 1;
+    const UNIT = 3;
 
     /**
      *  'GET /products' Returns products with reviews
@@ -18,8 +18,11 @@ class ProductsController extends Controller
      */
     public function show(Request $request)
     {
+        // return Product::paginate(self::UNIT);
+        $paginate = Product::paginate(self::UNIT);
+
         // paginating product to limit element count
-        $skip = intVal($request->input('page')) * self::UNIT;
+        $skip = intVal($request->input('page') - 1) * self::UNIT;
 
         $products = Product::orderBy('updated_at', 'name')
                         ->skip($skip)
@@ -32,6 +35,6 @@ class ProductsController extends Controller
         }
 
         // repsonse return
-        return $products;
+        return ['data' => $products, 'paginate' => $paginate];
     }
 }
