@@ -1,5 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
+const API_SERVER_URL = 'http://localhost:8888/products';
+
 const products = () => {
     return dispatch => {
         // products data 요청
@@ -7,12 +9,12 @@ const products = () => {
             type: 'REQUEST_PRODUCTS'
         });
 
-        return fetch('http://api.com/products')
+        return fetch(API_SERVER_URL)
             .then(response => response.json())
-            .then(json => {
+            .then(products => {
                 dispatch({
                     type: 'RECIEVE_PRODUCTS',
-                    products: json.data
+                    products
                 });
             })
             .catch(error => {
