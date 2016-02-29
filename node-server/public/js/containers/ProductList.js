@@ -28,7 +28,7 @@ export class ProductList extends Component {
     render(){
 
         // const { keyword, products } = this.context.store.getState();
-        const { fetchProducts, onProductClick, paginate, visibleProducts } = this.props;
+        const { fetchProducts, keyword, onProductClick, paginate, visibleProducts } = this.props;
 
         return(
             <div style={{marginTop: 30}}>
@@ -42,8 +42,8 @@ export class ProductList extends Component {
                         )
                     }
                 </div>
-                <ProductPaginate
-                    fetchProducts={fetchProducts}
+                <ProductPaginate fetchProducts={fetchProducts}
+                    keyword={keyword}
                     paginate={paginate}
                 />
             </div>
@@ -65,7 +65,8 @@ const mapStateToProductListProps = (state) => {
                             state.products.filter((product) => {
                                 return product.name.indexOf(state.keyword) >= 0}
                             ) : state.products,
-        paginate: state.paginate
+        paginate: state.paginate,
+        keyword: state.keyword
     };
 };
 
@@ -78,11 +79,10 @@ const mapDispatchToProductListProps = (dispatch) => {
             e.preventDefault();
 
             // const listEl = e.target.parentNode;
-
             dispatch(selectedProduct(e.target.dataset.id));
         },
-        fetchProducts: (page = 1) => {
-            dispatch(products(page));
+        fetchProducts: (page, keyword) => {
+            dispatch(products(page, keyword));
         }
     };
 };

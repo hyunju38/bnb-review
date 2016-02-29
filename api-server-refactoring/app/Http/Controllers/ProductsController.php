@@ -19,15 +19,24 @@ class ProductsController extends Controller
     public function show(Request $request)
     {
         // return Product::paginate(self::UNIT);
-        $paginate = Product::paginate(self::UNIT);
+
+        // odered by updated_at
+        // if request parameter has a keyword, products are ordered by name and updated_at
+        $keyword = $request->input('keyword');
+        $paginate = empty($keyword) ?
+                        Product::orderBy('updated_at', 'desc')->paginate(self::UNIT) :
+                        Product::where('name', 'like', "%$keyword%")
+                            ->orderBy('name', 'asc')
+                            ->paginate(self::UNIT);
 
         // paginating product to limit element count
         $skip = intVal($request->input('page') - 1) * self::UNIT;
 
-        $products = Product::orderBy('updated_at', 'name')
-                        ->skip($skip)
-                        ->take(self::UNIT)
-                        ->get();
+        $products = $paginate->items();
+        // $products = Product::orderBy('updated_at', 'name')
+        //                 ->skip($skip)
+        //                 ->take(self::UNIT)
+        //                 ->get();
 
         // embeding review to product
         foreach ($products as $key => $product) {

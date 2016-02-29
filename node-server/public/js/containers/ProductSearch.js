@@ -2,13 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { setKeyword } from '../actions/ActionsCreator';
+import products from '../actions/products';
 
-export let ProductSearch = ({ onSearchButtonClick }) => {
+const ENTER_KEYCODE = 13;
+
+export let ProductSearch = ({
+    onInputKeyword,
+    onSearchButtonClick
+}) => {
     let inputText;
     return(
         <div>
             <div className="input-group">
                 <input className="form-control"
+                    onKeyDown={onInputKeyword}
                     placeholder="Search for..."
                     ref={(node) => { inputText = node }}
                     type="text"
@@ -45,10 +52,22 @@ export let ProductSearch = ({ onSearchButtonClick }) => {
 //     store: React.PropTypes.object
 // };
 // ProductSearch = connect()(ProductSearch);
+
 const mapDispatchToProductListProps = (dispatch) => {
+
+    const searchProducts = (keyword) => {
+        dispatch(setKeyword(keyword));
+        dispatch(products(undefined, keyword));
+    };
+
     return {
-        onSearchButtonClick: (value) => {
-            dispatch(setKeyword(value));
+        onSearchButtonClick: (keyword) => {
+            searchProducts(keyword);
+        },
+        onInputKeyword: (e) => {
+            if (e.keyCode === ENTER_KEYCODE) {
+                searchProducts(e.target.value);
+            }
         }
     };
 };

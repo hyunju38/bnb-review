@@ -2,14 +2,14 @@ import fetch from 'isomorphic-fetch';
 
 const API_SERVER_URL = 'http://localhost:8888';
 
-const products = (page) => {
+const products = (page = 1, keyword = '') => {
     return dispatch => {
         // products data 요청
         dispatch({
             type: 'REQUEST_PRODUCTS'
         });
 
-        return fetch(`${API_SERVER_URL}/products?page=${page}`)
+        return fetch(`${API_SERVER_URL}/products?page=${page}&keyword=${keyword}`)
             .then(response => response.json())
             .then(json => {
                 dispatch({

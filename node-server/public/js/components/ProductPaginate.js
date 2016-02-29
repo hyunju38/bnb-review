@@ -34,6 +34,7 @@ const getPages = (paginate) => {
 
 const ProductPaginate = ({
     fetchProducts,
+    keyword,
     paginate
 }) => {
     const pages = getPages(paginate);
@@ -46,7 +47,7 @@ const ProductPaginate = ({
                             <a href="#" aria-label="Previous"
                                 onClick={(e) => {
                                     e.preventDefault();
-                                    fetchProducts(paginate.current_page - 1);
+                                    fetchProducts(paginate.current_page - 1, keyword);
                                 }}
                             >
                                 <span aria-hidden="true">&laquo;</span>
@@ -66,7 +67,7 @@ const ProductPaginate = ({
                                     }}
                                     onClick={(e)=>{
                                         e.preventDefault();
-                                        fetchProducts(page);}}
+                                        fetchProducts(page, keyword);}}
                                 >
                                     { page }
                                 </a>
@@ -76,12 +77,12 @@ const ProductPaginate = ({
                 }
 
                 {
-                    paginate && paginate.current_page !== paginate.last_page ?
+                    paginate && paginate.current_page < paginate.last_page ?
                         <li>
                             <a href="#" aria-label="Next"
                                 onClick={(e) => {
                                     e.preventDefault();
-                                    fetchProducts(paginate.current_page + 1);
+                                    fetchProducts(paginate.current_page + 1, keyword);
                                 }}
                             >
                                 <span aria-hidden="true">&raquo;</span>

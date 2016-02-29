@@ -11,7 +11,9 @@ const ProductItem = ({
             data-id={product._id}
         >
             { product.name }
-            <span className="badge">
+            <span className="badge"
+                onClick={(e) => {e.stopPropagation();}}
+            >
                 { product.reviews.length }
             </span>
         </a>
