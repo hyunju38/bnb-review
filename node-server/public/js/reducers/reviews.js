@@ -68,9 +68,6 @@ const paginate = (state = {}, action) => {
 
 const products = (state = [], action) => {
     switch (action.type) {
-        case ActionsType.REQUEST_PRODUCTS:
-            // spin ...
-            return state;
         case ActionsType.RECIEVE_PRODUCTS:
             return action.products;
         case ActionsType.RECIEVE_ERROR:
@@ -124,11 +121,24 @@ const selectedProductId = (state = '', action) => {
     }
 };
 
+const isFetching = (state = false, action) => {
+    switch (action.type) {
+        case ActionsType.REQUEST_PRODUCTS:
+            return true;
+        case ActionsType.RECIEVE_PRODUCTS:
+        case ActionsType.RECIEVE_ERROR:
+            return false;
+        default:
+            return state;
+    }
+}
+
 const rootReducer = combineReducers({
     keyword,
     paginate,
     products,
-    selectedProductId
+    selectedProductId,
+    isFetching
 });
 
 export default rootReducer;

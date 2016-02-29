@@ -6,7 +6,6 @@ import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 
 import rootReducer from './reducers/reviews';
-
 import App from './containers/App';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

@@ -7,6 +7,7 @@ import products from '../actions/products';
 const ENTER_KEYCODE = 13;
 
 export let ProductSearch = ({
+    isFetching,
     onInputKeyword,
     onSearchButtonClick
 }) => {
@@ -22,10 +23,11 @@ export let ProductSearch = ({
                 />
                 <span className="input-group-btn">
                     <button className="btn btn-default"
+                        disabled={ isFetching }
                         onClick={()=>onSearchButtonClick(inputText.value)}
                         type="button"
                     >
-                        Search
+                        { isFetching ? 'Searching...' : 'Search' }
                     </button>
                 </span>
             </div>
@@ -53,6 +55,12 @@ export let ProductSearch = ({
 // };
 // ProductSearch = connect()(ProductSearch);
 
+const mapStateToProductListProps = (state) => {
+    return {
+        isFetching: state.isFetching
+    };
+}
+
 const mapDispatchToProductListProps = (dispatch) => {
 
     const searchProducts = (keyword) => {
@@ -73,6 +81,6 @@ const mapDispatchToProductListProps = (dispatch) => {
 };
 
 export default connect(
-    null,
+    mapStateToProductListProps,
     mapDispatchToProductListProps
 )(ProductSearch);
