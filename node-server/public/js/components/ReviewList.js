@@ -10,8 +10,8 @@ const ReviewList = ({
     onClick
 }) => {
     return(
-        <div>
-            <ul>
+        <div style={{marginTop: 30}}>
+            <ul className="list-unstyled">
                 {
                     selectedProduct.reviews.map(review =>
                         <ReviewItem key={review._id}

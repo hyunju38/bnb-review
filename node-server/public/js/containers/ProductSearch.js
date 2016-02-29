@@ -7,10 +7,21 @@ export let ProductSearch = ({ onSearchButtonClick }) => {
     let inputText;
     return(
         <div>
-            <input type="text" ref={(node) => { inputText = node }}/>
-            <button onClick={()=>onSearchButtonClick(inputText.value)}>
-                Search
-            </button>
+            <div className="input-group">
+                <input className="form-control"
+                    placeholder="Search for..."
+                    ref={(node) => { inputText = node }}
+                    type="text"
+                />
+                <span className="input-group-btn">
+                    <button className="btn btn-default"
+                        onClick={()=>onSearchButtonClick(inputText.value)}
+                        type="button"
+                    >
+                        Search
+                    </button>
+                </span>
+            </div>
         </div>
     );
 };

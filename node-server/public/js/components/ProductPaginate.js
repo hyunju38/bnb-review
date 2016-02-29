@@ -38,7 +38,7 @@ const ProductPaginate = ({
 }) => {
     const pages = getPages(paginate);
     return(
-        <div>
+        <div className="text-center">
             <ul className={'pagination'}>
                 {
                     paginate && paginate.prev_page_url ?

@@ -53,15 +53,19 @@ const mapStateToSideProps = (state) => {
 
 const mapDispatchToSideProps = (dispatch, ownProps) => {
     return {
-        onAddReviewButtonClick: (productId) => (textarea, inputNumber) => {
-            dispatch(addReview(
-                textarea.value || '',
-                inputNumber.value || 0,
-                productId,
-                1
-            ));
-            textarea.value = '';
-            inputNumber.value = '';
+        onAddReviewButtonClick: (productId) => {
+            event.preventDefault();
+            return (textarea, inputNumber) => {
+                event.preventDefault();
+                dispatch(addReview(
+                    textarea.value || '',
+                    inputNumber.value || 0,
+                    productId,
+                    1
+                ));
+                textarea.value = '';
+                inputNumber.value = '';
+            };
         },
         onRemoveReviewButtonClick: (id) => {
             dispatch(removeReview(id));

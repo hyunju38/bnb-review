@@ -7,11 +7,25 @@ const ReviewInput = ({
     let inputNumber, textarea;
     return(
         <div>
-            <textarea ref={(node) => { textarea = node }} />
-            <input type="number" ref={(node) => { inputNumber = node }} />
-            <button onClick={() => { onClick(textarea, inputNumber); }} >
-                리뷰 등록
-            </button>
+            <form>
+                <div className="form-group">
+                    <textarea className="form-control"
+                        ref={(node) => { textarea = node }}
+                        rows="5"
+                    />
+                </div>
+                <div className="form-group">
+                    <input className="form-control"
+                        type="number"
+                        ref={(node) => { inputNumber = node }}
+                    />
+                </div>
+                <button className="btn btn-primary"
+                    type="submit"
+                    onClick={() => { onClick(textarea, inputNumber); }} >
+                    리뷰 등록
+                </button>
+            </form>
         </div>
     );
 };

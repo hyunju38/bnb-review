@@ -31,8 +31,8 @@ export class ProductList extends Component {
         const { fetchProducts, onProductClick, paginate, visibleProducts } = this.props;
 
         return(
-            <div>
-                <ul>
+            <div style={{marginTop: 30}}>
+                <div className="list-group">
                     {
                         visibleProducts.map((product) =>
                             <ProductItem key={product._id}
@@ -41,7 +41,7 @@ export class ProductList extends Component {
                             />
                         )
                     }
-                </ul>
+                </div>
                 <ProductPaginate
                     fetchProducts={fetchProducts}
                     paginate={paginate}
@@ -77,9 +77,9 @@ const mapDispatchToProductListProps = (dispatch) => {
              */
             e.preventDefault();
 
-            const listEl = e.target.parentNode;
+            // const listEl = e.target.parentNode;
 
-            dispatch(selectedProduct(parseInt(listEl.dataset.id)));
+            dispatch(selectedProduct(e.target.dataset.id));
         },
         fetchProducts: (page = 1) => {
             dispatch(products(page));

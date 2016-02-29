@@ -5,11 +5,16 @@ const ProductItem = ({
     product
 }) => {
     return(
-        <li data-id={product._id}>
-            <a href="#" onClick={onClick}>
-                {`펜션 이름: ${product.name}, 리뷰 개수: ${product.reviews.length}`}
-            </a>
-        </li>
+        <a className="list-group-item"
+            href="#"
+            onClick={onClick}
+            data-id={product._id}
+        >
+            { product.name }
+            <span className="badge">
+                { product.reviews.length }
+            </span>
+        </a>
     );
 };
 
