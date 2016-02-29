@@ -1,20 +1,21 @@
 import fetch from 'isomorphic-fetch';
 
-const API_SERVER_URL = 'http://localhost:8888/products';
+const API_SERVER_URL = 'http://localhost:8888';
 
-const products = () => {
+const products = (page) => {
     return dispatch => {
         // products data 요청
         dispatch({
             type: 'REQUEST_PRODUCTS'
         });
 
-        return fetch(API_SERVER_URL)
+        return fetch(`${API_SERVER_URL}/products?page=${page}`)
             .then(response => response.json())
-            .then(products => {
+            .then(json => {
                 dispatch({
                     type: 'RECIEVE_PRODUCTS',
-                    products
+                    products: json.data,
+                    paginate: json.paginate
                 });
             })
             .catch(error => {

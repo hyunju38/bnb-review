@@ -57,6 +57,15 @@ const reviews = (state = [], action) => {
     }
 };
 
+const paginate = (state = {}, action) => {
+    switch (action.type) {
+        case ActionsType.RECIEVE_PRODUCTS:
+            return action.paginate;
+        default:
+            return state;
+    }
+};
+
 const products = (state = [], action) => {
     switch (action.type) {
         case ActionsType.REQUEST_PRODUCTS:
@@ -117,6 +126,7 @@ const selectedProductId = (state = '', action) => {
 
 const rootReducer = combineReducers({
     keyword,
+    paginate,
     products,
     selectedProductId
 });
