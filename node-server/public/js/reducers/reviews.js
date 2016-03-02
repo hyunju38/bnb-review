@@ -26,6 +26,18 @@ const review = (state = {}, action) => {
 const reviews = (state = [], action) => {
     let reviewsIndex = -1;
     switch (action.type) {
+        case 'REQUEST_ADD_REVIEW':
+            return state;
+        case 'RECIEVE_ADD_REVIEW':
+            return {
+                _id: action._id,
+                comment: action.comment,
+                score: action.score,
+                product_id: action.product_id,
+                user_id: action.user_id
+            };
+        case 'RECIEVE_ADD_REVIEW_ERROR':
+            return state;
         case ActionsType.ADD_REVIEW:
             return [
                 ...state,

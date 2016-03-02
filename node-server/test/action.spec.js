@@ -3,12 +3,12 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 
+import * as constants from '../public/js/constants';
 import {
     SELECTED_PRODUCT, SET_KEYWORD, ADD_REVIEW, UPDATE_REVIEW, REMOVE_REVIEW,
     REQUEST_PRODUCTS, RECIEVE_PRODUCTS, RECIEVE_ERROR,
     selectedProduct, setKeyword, addReview, removeReview
 } from '../public/js/actions/ActionsCreator';
-
 import products, { fetchTodos } from '../public/js/actions/products';
 
 const middlewares = [ thunk ];
@@ -21,7 +21,7 @@ describe('Async actions', () => {
     });
 
     it('should create an action if a response is successful', (done) => {
-        nock('http://api.com/')
+        nock(constants.API_SERVER_URL)
             .get('/products')
             .reply(200, {
                 data: ['do something']
@@ -42,7 +42,7 @@ describe('Async actions', () => {
     });
 
     it('should create an error action if a response is an error', (done) => {
-        nock('http://api.com/')
+        nock(constants.API_SERVER_URL)
             .get('/products')
             .replyWithError('something awful happened');
 

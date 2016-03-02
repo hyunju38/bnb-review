@@ -1,6 +1,7 @@
 // import fetch from 'isomorphic-fetch';
+import $ from 'jquery';
 
-const API_SERVER_URL = 'http://localhost:8888';
+import * as constants from '../constants';
 
 const products = (page = 1, keyword = '') => {
     return dispatch => {
@@ -9,7 +10,7 @@ const products = (page = 1, keyword = '') => {
             type: 'REQUEST_PRODUCTS'
         });
 
-        return $.get(`${API_SERVER_URL}/products?page=${page}&keyword=${keyword}`)
+        return $.get(`${constants.API_SERVER_URL}/products?page=${page}&keyword=${keyword}`)
                     .then(response => {
                         dispatch({
                             type: 'RECIEVE_PRODUCTS',
