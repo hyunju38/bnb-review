@@ -3,13 +3,13 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 
-import * as constants from '../public/js/constants';
+import * as constants from '../../public/js/constants';
 import {
     SELECTED_PRODUCT, SET_KEYWORD, ADD_REVIEW, UPDATE_REVIEW, REMOVE_REVIEW,
     REQUEST_PRODUCTS, RECIEVE_PRODUCTS, RECIEVE_ERROR,
     selectedProduct, setKeyword, addReview, removeReview
-} from '../public/js/actions/ActionsCreator';
-import products, { fetchTodos } from '../public/js/actions/products';
+} from '../../public/js/actions/ActionsCreator';
+import products, { fetchTodos } from '../../public/js/actions/products';
 
 const middlewares = [ thunk ];
 const mockStore = configureMockStore(middlewares);
