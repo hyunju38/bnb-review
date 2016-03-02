@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch';
+// import fetch from 'isomorphic-fetch';
 
 const API_SERVER_URL = 'http://localhost:8888';
 
@@ -9,20 +9,19 @@ const products = (page = 1, keyword = '') => {
             type: 'REQUEST_PRODUCTS'
         });
 
-        return fetch(`${API_SERVER_URL}/products?page=${page}&keyword=${keyword}`)
-            .then(response => response.json())
-            .then(json => {
-                dispatch({
-                    type: 'RECIEVE_PRODUCTS',
-                    products: json.data,
-                    paginate: json.paginate
-                });
-            })
-            .catch(error => {
-                dispatch({
-                    type: 'RECIEVE_ERROR'
-                });
-            });
+        return $.get(`${API_SERVER_URL}/products?page=${page}&keyword=${keyword}`)
+                    .then(response => {
+                        dispatch({
+                            type: 'RECIEVE_PRODUCTS',
+                            products: response.data,
+                            paginate: response.paginate
+                        });
+                    })
+                    .fail(error => {
+                        dispatch({
+                            type: 'RECIEVE_ERROR'
+                        });
+                    });
 
         // // ajax call => mocha test, XMLHttpRequest is undefined http://stackoverflow.com/questions/32304150/correct-usage-of-sinons-fake-xmlhttprequest
         // return new Promise((resolve, reject) => {

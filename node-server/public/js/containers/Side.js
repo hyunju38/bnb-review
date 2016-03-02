@@ -24,16 +24,16 @@ export class Side extends Component {
         return(
             <div>
                 {
-                selectedProduct ?
-                    <aside>
-                        <ProductInfo selectedProduct={selectedProduct} />
-                        <ReviewInput onClick={onAddReviewButtonClick(selectedProduct._id)} />
-                        <ReviewList onClick={onRemoveReviewButtonClick}
-                            selectedProduct={selectedProduct}
-                        />
-                    </aside>
-                    :
-                    null
+                    selectedProduct ?
+                        <aside>
+                            <ProductInfo selectedProduct={selectedProduct} />
+                            <ReviewInput onClick={onAddReviewButtonClick(selectedProduct._id)} />
+                            <ReviewList onClick={onRemoveReviewButtonClick}
+                                selectedProduct={selectedProduct}
+                            />
+                        </aside>
+                        :
+                        ''
                 }
             </div>
         );
@@ -45,9 +45,7 @@ export class Side extends Component {
 
 const mapStateToSideProps = (state) => {
     return {
-        selectedProduct: state.products.filter((product) => {
-            return product._id === state.selectedProductId;
-        })[0] || null
+        selectedProduct: state.products.find(product => product._id === state.selectedProductId)
     };
 };
 
