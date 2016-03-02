@@ -22,7 +22,10 @@ const ReviewInput = ({
                 </div>
                 <button className="btn btn-primary"
                     type="submit"
-                    onClick={() => { onClick(textarea, inputNumber); }} >
+                    onClick={(e) => {
+                        e.preventDefault();
+                        onClick(textarea, inputNumber);
+                    }} >
                     리뷰 등록
                 </button>
             </form>

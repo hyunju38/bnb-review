@@ -11,7 +11,7 @@ const ReviewItem = ({ review, onClick }) => {
                 (() => {
                     let scoreStars = [];
                     for (let i = 1; i < MAX_SCORE + 1; i ++) {
-                        if (i < review.score) {
+                        if (i <= review.score) {
                             scoreStars.push(
                                 <span className="glyphicon glyphicon-star"
                                     aria-hidden="true" key={i}></span>

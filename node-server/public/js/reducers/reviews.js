@@ -5,6 +5,14 @@ import * as ActionsType from '../actions/ActionsCreator';
 const review = (state = {}, action) => {
     let reviewsIndex = -1;
     switch (action.type) {
+        case 'RECIEVE_ADD_REVIEW':
+            return {
+                _id: action._id,
+                comment: action.comment,
+                score: action.score,
+                product_id: action.product_id,
+                user_id: action.user_id
+            };
         case ActionsType.ADD_REVIEW:
             return {
                 _id: action._id,
@@ -29,13 +37,10 @@ const reviews = (state = [], action) => {
         case 'REQUEST_ADD_REVIEW':
             return state;
         case 'RECIEVE_ADD_REVIEW':
-            return {
-                _id: action._id,
-                comment: action.comment,
-                score: action.score,
-                product_id: action.product_id,
-                user_id: action.user_id
-            };
+            return [
+                ...state,
+                review(null, action)
+            ];
         case 'RECIEVE_ADD_REVIEW_ERROR':
             return state;
         case ActionsType.ADD_REVIEW:

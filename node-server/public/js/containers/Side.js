@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import reviews from '../actions/reviews';
 import { addReview, removeReview } from '../actions/ActionsCreator';
 
 import ProductInfo from '../components/ProductInfo';
@@ -52,15 +53,19 @@ const mapStateToSideProps = (state) => {
 const mapDispatchToSideProps = (dispatch, ownProps) => {
     return {
         onAddReviewButtonClick: (productId) => {
-            event.preventDefault();
             return (textarea, inputNumber) => {
-                event.preventDefault();
-                dispatch(addReview(
-                    textarea.value || '',
-                    inputNumber.value || 0,
-                    productId,
-                    1
-                ));
+                dispatch(reviews('POST', {
+                    comment: textarea.value,
+                    score: inputNumber.value,
+                    product_id: productId,
+                    user_id: 1
+                }));
+                // dispatch(addReview(
+                //     textarea.value || '',
+                //     inputNumber.value || 0,
+                //     productId,
+                //     1
+                // ));
                 textarea.value = '';
                 inputNumber.value = '';
             };
