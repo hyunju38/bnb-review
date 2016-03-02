@@ -1,24 +1,14 @@
 import * as ActionsType from '../actions/ActionsCreator';
+import * as Constants from '../constants';
 
 const review = (state = {}, action) => {
     let reviewsIndex = -1;
     switch (action.type) {
-        case 'RECIEVE_ADD_REVIEW':
-            return {
-                _id: action._id,
-                comment: action.comment,
-                score: action.score,
-                product_id: action.product_id,
-                user_id: action.user_id
-            };
-        case ActionsType.ADD_REVIEW:
-            return {
-                _id: action._id,
-                comment: action.comment,
-                score: action.score,
-                product_id: action.product_id,
-                user_id: action.user_id
-            };
+        // case ActionsType.ADD_REVIEW:
+        //     console.log(action.response);
+        //     return {
+        //         action.response
+        //     };
         case ActionsType.UPDATE_REVIEW:
             return Object.assign({}, state, {
                 comment: action.comment,
@@ -32,19 +22,13 @@ const review = (state = {}, action) => {
 const reviews = (state = [], action) => {
     let reviewsIndex = -1;
     switch (action.type) {
-        case 'REQUEST_ADD_REVIEW':
-            return state;
-        case 'RECIEVE_ADD_REVIEW':
-            return [
-                ...state,
-                review(null, action)
-            ];
-        case 'RECIEVE_ADD_REVIEW_ERROR':
-            return state;
         case ActionsType.ADD_REVIEW:
+            if (action.state !== Constants.SUCCESS) {
+                return state;
+            }
             return [
                 ...state,
-                review(null, action)
+                action.response
             ];
         case ActionsType.UPDATE_REVIEW:
             reviewsIndex = -1;

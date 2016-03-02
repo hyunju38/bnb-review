@@ -1,3 +1,6 @@
 const API_SERVER_URL = 'http://localhost:8888';
 
-export { API_SERVER_URL };
+const SUCCESS = 'success';
+const ERROR = 'error';
+
+export { API_SERVER_URL, SUCCESS, ERROR };
