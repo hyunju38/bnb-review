@@ -12,19 +12,22 @@ class ProductsTest extends TestCase
     public function testShow()
     {
         // returns JSON structure
-        $this->get('/products')
+        $this->json('GET', '/products', [ 'page' => 1, 'keyword' => '' ])
             ->seeJsonStructure([
-                [
-                    'name',
-                    'desc',
-                    'reviews' => [
-                        [
-                            '_id',
-                            'comment',
-                            'score'
+                'data' => [
+                    [
+                        'name',
+                        'desc',
+                        'reviews' => [
+                            [
+                                '_id',
+                                'comment',
+                                'score'
+                            ]
                         ]
                     ]
-                ]
+                ],
+                'paginate'
             ]);
     }
 }

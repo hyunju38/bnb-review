@@ -16,3 +16,6 @@ $app->get('/', function () use ($app) {
 });
 
 $app->get('/products', 'ProductsController@show');
+
+$app->post('/reviews', 'ReviewsController@store');
+$app->get('/reviews', 'ReviewsController@show');
