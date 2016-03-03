@@ -8,6 +8,8 @@ var getEntry = (env) => {
       entry.push('webpack-hot-middleware/client');
     }
 
+    // bootstrapclear
+    entry.push('bootstrap-loader');
     entry.push('./src/index');
     return entry;
 };
@@ -39,7 +41,24 @@ module.exports = (env) => {
         module: {
             loaders: [
                 { test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel', 'eslint'] },
-                { test: /\.scss$/, include: path.join(__dirname, 'src'), loaders: ['style', 'css', 'sass'] }
+                { test: /\.scss$/, include: path.join(__dirname, 'src'), loaders: ['style', 'css', 'sass'] },
+                {
+                    test: /\.css$/,
+                    loaders: [
+                        'style',
+                        'css?modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]',
+                        'postcss',
+                    ],
+                },
+                {
+                    test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                    loader: "url?limit=10000"
+                },
+                {
+                    test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
+                    loader: 'file'
+                },
+                { test: /bootstrap-sass\/assets\/javascripts\//, loader: 'imports?jQuery=jquery' }
             ]
         },
         plugins: getPlugins(env)

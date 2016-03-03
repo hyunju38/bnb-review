@@ -6,7 +6,7 @@ const ProductInfo = ({
     selectedProduct
 }) => {
     return (
-        <div>
+        <div className="jumbotron">
             <h1>{selectedProduct.name}</h1>
             <p>
                 {selectedProduct.desc}
