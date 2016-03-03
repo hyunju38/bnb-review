@@ -29,8 +29,7 @@ const reviews = (method = 'GET', review = {}) => {
                 error (error) {
                     dispatch({
                         type: ActionsType.ADD_REVIEW,
-                        status: Constants.ERROR,
-                        response: error
+                        status: Constants.ERROR
                     });
                 },
                 contentType: 'application/json'
