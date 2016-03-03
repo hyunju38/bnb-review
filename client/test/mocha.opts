@@ -1,0 +1,3 @@
+--reporter nyan
+--compilers js:babel-register --recursive
+--require ignore-styles
