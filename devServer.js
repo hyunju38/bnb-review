@@ -2,7 +2,9 @@ import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
+
 import app from './server/app';
+import mongodb from './server/libs/mongodb';
 import webpackConfigBuilder from './webpack.config';
 var webpackConfig = webpackConfigBuilder(process.env.NODE_ENV);
 
@@ -18,6 +20,8 @@ if (isDev) {
   app.use(webpackHotMiddleware(compiler));
 }
 
-app.listen(3000, () => {
-  console.log('Listening on port 3000');
+mongodb.connect(() => {
+    app.listen(3000, () => {
+      console.log('Listening on port 3000');
+    });
 });

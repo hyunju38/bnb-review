@@ -13,7 +13,7 @@ class Product extends Component {
 
     componentDidMount(){
         const { getProduct } = this.props;
-        getProduct();
+        getProduct('56d94501ab9e222f7ada60e4');
     }
 
     render(){
@@ -32,12 +32,12 @@ Product.displayName = DISPLAY_NAME;
 Product.propTypes = {
     getProduct: PropTypes.func,
     product: PropTypes.shape({
-        _id: PropTypes.number,
+        _id: PropTypes.string,
         name: PropTypes.string,
         desc: PropTypes.string,
         reviews: PropTypes.arrayOf(
             PropTypes.shape({
-                _id: PropTypes.number,
+                _id: PropTypes.string,
                 comment: PropTypes.string,
                 score: PropTypes.number,
                 user_id: PropTypes.number
@@ -46,7 +46,7 @@ Product.propTypes = {
     }),
     reviews: PropTypes.arrayOf(
         PropTypes.shape({
-            _id: PropTypes.number,
+            _id: PropTypes.string,
             comment: PropTypes.string,
             score: PropTypes.number,
             user_id: PropTypes.number
@@ -64,8 +64,8 @@ const mapStateToProductProps = (state) => {
 
 const mapDispatchToProductProps = (dispatch) => {
     return {
-        getProduct(){
-            dispatch(selectProduct(1));
+        getProduct(productid){
+            dispatch(selectProduct(productid));
         }
     };
 };

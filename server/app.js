@@ -9,7 +9,7 @@ app.use(express.static('clients'));
 app.use('/products', products);
 
 app.get('/', (request, response) => {
-  response.sendFile('./index.htm');
+  response.sendFile('./index.html');
 });
 
 // app.get('/products/:id', (request, response) => {

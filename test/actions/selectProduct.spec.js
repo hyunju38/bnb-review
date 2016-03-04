@@ -8,7 +8,7 @@ import selectedProduct from '../../clients/src/actions/selectProduct';
 const middlewares = [ thunk ];
 const mockStore = configureMockStore(middlewares);
 
-const API_SERVER_URL = 'http://localhost:8888';
+const API_SERVER_URL = 'http://localhost:3000';
 
 describe('selectedProduct actions', () => {
 
