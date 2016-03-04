@@ -9,6 +9,7 @@ const getEntry = (env) => {
   }
 
   entry.push('./clients/src/index');
+  entry.push('bootstrap-loader');   // bootstrap-loader
   return entry;
 };
 
@@ -40,8 +41,28 @@ module.exports = (env) => {
     devtool: 'source-map',
     module: {
       loaders: [
-        { test: /\.js$/, exclude: /node_modules/, loaders: ['babel', 'eslint'] },
-        { test: /\.scss$/, exclude: /node_modules/, loaders: ['style', 'css', 'sass'] }
+        {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loaders: ['babel', 'eslint']
+        },
+        {
+            test: /\.scss$/,
+            exclude: /node_modules/,
+            loaders: ['style', 'css', 'sass']
+        },
+        {
+            test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+            loader: "url?limit=10000"
+        },
+        {
+            test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
+            loader: 'file'
+        },
+        {
+            test: /bootstrap-sass\/assets\/javascripts\//,
+            loader: 'imports?jQuery=jquery'
+        }
       ]
     },
     plugins: getPlugins(env)
