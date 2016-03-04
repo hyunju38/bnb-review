@@ -2,16 +2,32 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import ProductInfo from './components/ProductInfo';
-import './main.scss';
+import ReviewList from './components/ReviewList';
 
-const props = {
-    selectedProduct: {
-        name: '룰루랄라',
-        desc: '아이후헤호하히하후호힝라두팓'
-    }
+const selectedProduct = {
+    _id: 1,
+    name: 'askfj;l',
+    desc: ';alsdknv;laknev;lak',
+    reviews: [
+        {
+            _id: 1,
+            comment: 'sa;lekj',
+            score: 4,
+            user_id: 1
+        },
+        {
+            _id: 2,
+            comment: 'as;ljlekn',
+            score: 2,
+            user_id: 1
+        }
+    ]
 };
 
 ReactDOM.render(
-    <ProductInfo {...props} />,
+    <div>
+        <ProductInfo {...selectedProduct} />
+        <ReviewList reviews={selectedProduct.reviews} />
+    </div>,
     document.getElementById('root')
 );

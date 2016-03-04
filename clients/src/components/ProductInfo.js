@@ -3,12 +3,12 @@ import React from 'react';
 const DISPLAY_NAME = 'PRODUCT_INFO';
 
 const ProductInfo = ({
-    selectedProduct
+    name, desc
 }) => {
     return(
-        <div>
-            <h1>{selectedProduct.name}</h1>
-            <p>{selectedProduct.desc}</p>
+        <div className="product-info">
+            <h1>{name}</h1>
+            <p>{desc}</p>
         </div>
     );
 };
