@@ -1,4 +1,4 @@
 --reporter nyan
 --compilers js:babel-register --recursive
-./test/**/*.spec.js
 --require ignore-styles
+--require ./test/setup.js
