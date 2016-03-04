@@ -20,9 +20,9 @@ const reviews = (state = [], action) => {
         default:
             return state;
     }
-}
+};
 
-const roots = (state = initState, action) => {
+const root = (state = initState, action) => {
     let statusObj;
     switch (action.type) {
         case 'SELECT_PRODUCT':
@@ -40,4 +40,4 @@ const roots = (state = initState, action) => {
     }
 };
 
-export default roots;
+export default root;

@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-const API_SERVER_URL = 'http://localhost:8888';
+const API_SERVER_URL = 'http://localhost:3000';
 
 const selectProduct = (id) => {
     return dispatch => {
