@@ -1,30 +1,19 @@
 import express from 'express';
 
+import model from '../models/Product';
+
 let router = express.Router();
 
 router.route('/:id')
     .get((request, response) => {
-        const product = {
-            _id: 1,
-            name: 'askfj;l',
-            desc: ';alsdknv;laknev;lak',
-            reviews: [
-                {
-                    _id: 1,
-                    comment: 'sa;lekj',
-                    score: 4,
-                    user_id: 1
-                },
-                {
-                    _id: 2,
-                    comment: 'as;ljlekn',
-                    score: 2,
-                    user_id: 1
-                }
-            ]
-        };
-        response.json({
-            data: product
+        model.getWithReviews(request.params.id, (error, product) => {
+            if (error) {
+                return response.status(503).json({
+                    error: true
+                });
+            }
+
+            response.status(200).json({ data: product });
         });
     });
 
