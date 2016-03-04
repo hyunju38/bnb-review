@@ -1,5 +1,0 @@
---reporter nyan
---compilers js:babel-core/register --recursive
- ./test/**/*.spec.js
---require ignore-styles
---require ./test/setup.js

@@ -1,30 +1,33 @@
 <?php
 
-/**
- *
- */
+use Laravel\Lumen\Testing\DatabaseTransactions;
+
 class ProductsTest extends TestCase
 {
     /**
-     *  @test
+     * Test show method of ProductsController
+     *
+     * @return void
      */
     public function testShow()
     {
-        $response = $this->client->get('/products');
-        $products = $this->getResponseArray($response)['data'];
-        // var_dump($this->getResponseArray($response));
-
-        $expected = [
-            'id' => 'string',
-            'type' => 'in:travel,news',
-            'attributes' => [
-                'page_id' => 'string',
-                'position' => 'integer',
-            ]
-        ];
-
-        // $this->assertValidArray($expected, $this->getResponseArray($response)['data'][0]);
-
-        // $this->markTestInComplete('add expected return data.');
+        // returns JSON structure
+        $this->json('GET', '/products', [ 'page' => 1, 'keyword' => '' ])
+            ->seeJsonStructure([
+                'data' => [
+                    [
+                        'name',
+                        'desc',
+                        'reviews' => [
+                            [
+                                '_id',
+                                'comment',
+                                'score'
+                            ]
+                        ]
+                    ]
+                ],
+                'paginate'
+            ]);
     }
 }

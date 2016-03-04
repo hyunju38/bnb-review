@@ -11,12 +11,17 @@
 |
 */
 
-$factory->define(App\Api\V1\Models\Collection::class, function ($faker) {
-    $types = ['travel', 'news'];
+$factory->define(App\Product::class, function ($faker) {
     return [
-        'id' => $faker->uuid,
-        'type' => $faker->randomElement($types),
-        'position' => $faker->randomDigit(),
-        'page_id' => $faker->uuid,
+        'name' => $faker->word,
+        'desc' => $faker->text
+    ];
+});
+
+$factory->define(App\Review::class, function ($faker) {
+    return [
+        'comment' => $faker->text,
+        'score' => $faker->numberBetween(1, 5),
+        'product_id' => App\Product::all()->random()->id
     ];
 });

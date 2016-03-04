@@ -25,7 +25,6 @@ $app = new Laravel\Lumen\Application(
 
 $app->withFacades();
 
-// $app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
 $app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
 
 $app->withEloquent();
@@ -81,10 +80,6 @@ $app->singleton(
 |
 */
 
-$app->register(Dingo\Api\Provider\LumenServiceProvider::class);
-$app->register(Barryvdh\Cors\LumenServiceProvider::class);
-
-
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
@@ -100,8 +95,8 @@ $app->register(Barryvdh\Cors\LumenServiceProvider::class);
 |
 */
 
-$app->group([], function () use ($app) {
-    require __DIR__.'/../app/Api/V1/routes.php';
+$app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
+    require __DIR__.'/../app/Http/routes.php';
 });
 
 return $app;
