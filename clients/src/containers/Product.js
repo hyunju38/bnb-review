@@ -13,17 +13,18 @@ class Product extends Component {
 
     componentDidMount(){
         const { getProduct } = this.props;
-        getProduct('56d94501ab9e222f7ada60e4');
+        getProduct('56d94501ab9e222f7ada60e4', {
+            page: 1
+        });
     }
 
     render(){
-
-        const { product, reviews } = this.props;
-
+        const { getProduct, product, reviews } = this.props;
         return(
             <div>
                 <ProductInfo {...product} />
-                <ReviewList reviews={reviews} />
+                <ReviewList reviews={reviews}
+                    getProduct={getProduct} />
             </div>
         );
     }
@@ -40,8 +41,8 @@ const mapStateToProductProps = (state) => {
 
 const mapDispatchToProductProps = (dispatch) => {
     return {
-        getProduct(productid){
-            dispatch(selectProduct(productid));
+        getProduct(productid, options = {}){
+            dispatch(selectProduct(productid, options));
         }
     };
 };

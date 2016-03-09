@@ -2,17 +2,16 @@ import $ from 'jquery';
 
 const API_SERVER_URL = 'http://localhost:3000';
 
-const selectProduct = (id) => {
+const selectProduct = (id, options = {}) => {
     return dispatch => {
         dispatch({
             type: 'SELECT_PRODUCT'
         });
 
-        const st = $('.test');
-
         $.ajax(`${API_SERVER_URL}/products/${id}`, {
             type: 'GET',
             dataType: 'json',
+            data: options,
             success (response) {
                 dispatch({
                     type: 'SELECT_PRODUCT',

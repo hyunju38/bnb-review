@@ -7,7 +7,8 @@ let router = express.Router();
 router.route('/:id')
     .get((request, response) => {
         const options = {
-            page: request.query.page || 1
+            page: +request.query.page || 1,
+            size: +request.query.size || 5
         };
         
         model.getWithReviews(request.params.id, options, (error, product) => {
