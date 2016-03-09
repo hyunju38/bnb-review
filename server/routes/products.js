@@ -6,7 +6,11 @@ let router = express.Router();
 
 router.route('/:id')
     .get((request, response) => {
-        model.getWithReviews(request.params.id, (error, product) => {
+        const options = {
+            page: request.query.page || 1
+        };
+        
+        model.getWithReviews(request.params.id, options, (error, product) => {
             if (error) {
                 return response.status(503).json({
                     error: true

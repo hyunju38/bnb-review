@@ -29,4 +29,26 @@ describe('products routes', () => {
             .get('/products/56d94501ab9e222f7ada60e4')
             .expect(/띠리따라/, done);
     });
+    
+    it('Should returns reviews of product', (done) => {
+        request(app)
+            .get('/products/56d94501ab9e222f7ada60e4')
+            .expect(/ve;lkanceq/, done);
+    });
+    
+    it('Should returns reviews of product', (done) => {
+        request(app)
+            .get('/products/56d94501ab9e222f7ada60e4?page=2')
+            .expect((response) => {
+                if ( response.body.data.reviews.length > 0 ) {
+                  throw new Error("Reviews are empty on 2 Page");
+                }
+            })
+            .end((error) => {
+                if (error) {
+                    throw error;
+                }
+                done();
+            });
+    });
 });
