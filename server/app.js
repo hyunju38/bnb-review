@@ -1,12 +1,14 @@
 import express from 'express';
 
 import products from './routes/products';
+import reviews from './routes/reviews';
 
 const app = express();
 
 app.use(express.static('clients'));
 
 app.use('/products', products);
+app.use('/reviews', reviews);
 
 app.get('/', (request, response) => {
   response.sendFile('./index.html');

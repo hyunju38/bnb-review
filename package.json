@@ -57,6 +57,7 @@
     "webpack-hot-middleware": "^2.6.0"
   },
   "dependencies": {
+    "body-parser": "^1.15.0",
     "bootstrap-sass": "^3.3.6",
     "express": "^4.13.4",
     "jquery": "^2.2.1",
