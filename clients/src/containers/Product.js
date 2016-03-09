@@ -29,36 +29,12 @@ class Product extends Component {
     }
 }
 Product.displayName = DISPLAY_NAME;
-Product.propTypes = {
-    getProduct: PropTypes.func,
-    product: PropTypes.shape({
-        _id: PropTypes.string,
-        name: PropTypes.string,
-        desc: PropTypes.string,
-        reviews: PropTypes.arrayOf(
-            PropTypes.shape({
-                _id: PropTypes.string,
-                comment: PropTypes.string,
-                score: PropTypes.number,
-                user_id: PropTypes.number
-            })
-        )
-    }),
-    reviews: PropTypes.arrayOf(
-        PropTypes.shape({
-            _id: PropTypes.string,
-            comment: PropTypes.string,
-            score: PropTypes.number,
-            user_id: PropTypes.number
-        })
-    )
-};
 
 const mapStateToProductProps = (state) => {
     const product = state.selectedProduct.product || {};
     return {
         product,
-        reviews: product.reviews || []
+        reviews: product.reviews || {}
     };
 };
 

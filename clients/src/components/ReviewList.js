@@ -5,20 +5,21 @@ const DISPLAY_NAME = 'DISPLAY_NAME';
 const ReviewList = ({
     reviews
 }) => {
+    const { items, paginator } = reviews;
     return(
         <div className="review-list list-group">
             {
-                reviews.map((review) => {
+                items && items.map((item) => {
                     return(
                         <a className="list-group-item"
                             href="#"
-                            key={review._id}
+                            key={item._id}
                         >
                             <h4 className="list-group-item-heading">
-                                {`${review.score} by ${review.user_id}`}
+                                {`${item.score} by ${item.user_id}`}
                             </h4>
                             <p className="list-group-item-text">
-                                {review.comment}
+                                {item.comment}
                             </p>
                         </a>
                     );
