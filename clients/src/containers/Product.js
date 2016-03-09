@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import ProductInfo from '../components/ProductInfo';
 import ReviewList from '../components/ReviewList';
+import ReviewForm from '../components/ReviewForm';
 
 import selectProduct from '../actions/selectProduct';
 
@@ -25,6 +26,7 @@ class Product extends Component {
                 <ProductInfo {...product} />
                 <ReviewList reviews={reviews}
                     getProduct={getProduct} />
+                <ReviewForm />
             </div>
         );
     }
