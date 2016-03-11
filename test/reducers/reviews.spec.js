@@ -11,6 +11,7 @@ describe('Review reducer', () => {
         it ('should get reviews data', () => {
 
             const stateBefore = {
+                status: null,
                 response: []
             };
 
@@ -22,10 +23,12 @@ describe('Review reducer', () => {
                     'name': '룰루랄라',
                     'desc': '랄라라라라라라라라ㅏ라라랄라랄',
                     'reviews': {
-                        status: undefined,
+                        status: null,
                         paginator: {
                             curPage: 1,
-                            totalPage: 1
+                            totalPage: 1,
+                            size: 5,
+                            itemCount: 2
                         },
                         items: [
                             {
@@ -52,7 +55,9 @@ describe('Review reducer', () => {
                 response: {
                     paginator: {
                         curPage: 1,
-                        totalPage: 1
+                        totalPage: 1,
+                        size: 5,
+                        itemCount: 2
                     },
                     items: [
                         {
@@ -84,11 +89,13 @@ describe('Review reducer', () => {
         it ('should only set status if it have an error', () => {
 
             const stateBefore = {
-                status: undefined,
+                status: null,
                 response: {
                     paginator: {
                         curPage: 1,
-                        totalPage: 1
+                        totalPage: 1,
+                        size: 5,
+                        itemCount: 0
                     },
                     items: []
                 }
@@ -104,7 +111,9 @@ describe('Review reducer', () => {
                 response: {
                     paginator: {
                         curPage: 1,
-                        totalPage: 1
+                        totalPage: 1,
+                        size: 5,
+                        itemCount: 0
                     },
                     items: []
                 }
@@ -121,26 +130,31 @@ describe('Review reducer', () => {
         it ('should not modify if it just request', () => {
 
             const stateBefore = {
-                status: undefined,
+                status: null,
                 response: {
                     paginator: {
                         curPage: 1,
-                        totalPage: 1
+                        totalPage: 1,
+                        size: 5,
+                        itemCount: 0
                     },
                     items: []
                 }
             };
 
             const action = {
-                type: 'SELECT_PRODUCT'
+                type: 'SELECT_PRODUCT',
+                status: null
             };
 
             const stateAfter = {
-                status: undefined,
+                status: null,
                 response: {
                     paginator: {
                         curPage: 1,
-                        totalPage: 1
+                        totalPage: 1,
+                        size: 5,
+                        itemCount: 0
                     },
                     items: []
                 }
@@ -156,88 +170,188 @@ describe('Review reducer', () => {
 
     });
 
-    // describe('ADD_REVIEW test code', () => {
+    describe('ADD_REVIEW test code', () => {
 
-    //     it('should add review object to response', () => {
+        it('should add review object to response', () => {
             
-    //         const stateBefore = {
-    //             response: []
-    //         };
+            const stateBefore = {
+                status: null,
+                response: {
+                    paginator: {
+                        curPage: 1,
+                        totalPage: 1,
+                        size: 1,
+                        itemCount: 1
+                    },
+                    items: [
+                        {
+                            '_id': 1,
+                            'comment': 'something',
+                            'score': 2,
+                            'product_id': 3,
+                            'user_id': 4
+                        }
+                    ]
+                }
+            };
 
-    //         const action = {
-    //             type: 'ADD_REVIEW',
-    //             status: 'SUCCESS',
-    //             response: {
-    //                 '_id': 1,
-    //                 'comment': 'something',
-    //                 'score': 2,
-    //                 'product_id': 3,
-    //                 'user_id': 4
-    //             }
-    //         };
+            const action = {
+                type: 'ADD_REVIEW',
+                status: 'SUCCESS',
+                review: {
+                    '_id': 2,
+                    'comment': 'something',
+                    'score': 2,
+                    'product_id': 3,
+                    'user_id': 4
+                }
+            };
 
-    //         const stateAfter = {
-    //             status: 'SUCCESS',
-    //             response: [
-    //                 {
-    //                     '_id': 1,
-    //                     'comment': 'something',
-    //                     'score': 2,
-    //                     'product_id': 3,
-    //                     'user_id': 4
-    //                 }
-    //             ]
-    //         };
+            const stateAfter = {
+                status: 'SUCCESS',
+                response: {
+                    paginator: {
+                        curPage: 1,
+                        totalPage: 2,
+                        size: 1,
+                        itemCount: 2
+                    },
+                    items: [
+                        {
+                            '_id': 1,
+                            'comment': 'something',
+                            'score': 2,
+                            'product_id': 3,
+                            'user_id': 4
+                        },
+                        {
+                            '_id': 2,
+                            'comment': 'something',
+                            'score': 2,
+                            'product_id': 3,
+                            'user_id': 4
+                        }
+                    ]
+                } 
+            };
 
-    //         deepFreeze(stateBefore);
+            deepFreeze(stateBefore);
 
-    //         expect(
-    //             reviews(stateBefore, action)
-    //         ).to.deep.equal(stateAfter);
-    //     });
+            expect(
+                reviews(stateBefore, action)
+            ).to.deep.equal(stateAfter);
+        });
 
-    //     it('should not modify if it is without action.status', () => {
-    //         const stateBefore = {
-    //             response: []
-    //         };
+        it('should not modify if status is null', () => {
+            const stateBefore = {
+                status: null,
+                response: {
+                    paginator: {
+                        curPage: 1,
+                        totalPage: 1,
+                        size: 1,
+                        itemCount: 1
+                    },
+                    items: [
+                        {
+                            '_id': 1,
+                            'comment': 'something',
+                            'score': 2,
+                            'product_id': 3,
+                            'user_id': 4
+                        }
+                    ]
+                }
+            };
 
-    //         const action = {
-    //             type: 'ADD_REVIEW'
-    //         };
+            const action = {
+                type: 'ADD_REVIEW',
+                status: null
+            };
 
-    //         const stateAfter = {
-    //             response: []
-    //         };
+            const stateAfter = {
+                status: null,
+                response: {
+                    paginator: {
+                        curPage: 1,
+                        totalPage: 1,
+                        size: 1,
+                        itemCount: 1
+                    },
+                    items: [
+                        {
+                            '_id': 1,
+                            'comment': 'something',
+                            'score': 2,
+                            'product_id': 3,
+                            'user_id': 4
+                        }
+                    ]
+                }
+            };
 
-    //         deepFreeze(stateBefore);
+            deepFreeze(stateBefore);
 
-    //         expect(
-    //             reviews(stateBefore, action)
-    //         ).to.deep.equal(stateAfter);
-    //     });
+            expect(
+                reviews(stateBefore, action)
+            ).to.deep.equal(stateAfter);
+        });
 
-    //     it('should add status if you have an error', () => {
-    //         const stateBefore = {
-    //             response: []
-    //         };
+        it('should add status if you have an error', () => {
+            const stateBefore = {
+                status: null,
+                response: {
+                    paginator: {
+                        curPage: 1,
+                        totalPage: 1,
+                        size: 1,
+                        itemCount: 1
+                    },
+                    items: [
+                        {
+                            '_id': 1,
+                            'comment': 'something',
+                            'score': 2,
+                            'product_id': 3,
+                            'user_id': 4
+                        }
+                    ]
+                }
+            };
 
-    //         const action = {
-    //             type: 'ADD_REVIEW',
-    //             status: 'ERROR'
-    //         };
+            const action = {
+                type: 'ADD_REVIEW',
+                status: 'ERROR'
+            };
 
-    //         const stateAfter = {
-    //             status: 'ERROR',
-    //             response: []
-    //         };
+            const stateAfter = {
+                status: 'ERROR',
+                response: {
+                    paginator: {
+                        curPage: 1,
+                        totalPage: 1,
+                        size: 1,
+                        itemCount: 1
+                    },
+                    items: [
+                        {
+                            '_id': 1,
+                            'comment': 'something',
+                            'score': 2,
+                            'product_id': 3,
+                            'user_id': 4
+                        }
+                    ]
+                }
+            };
 
-    //         deepFreeze(stateBefore);
+            deepFreeze(stateBefore);
 
-    //         expect(
-    //             reviews(stateBefore, action)
-    //         ).to.deep.equal(stateAfter);
-    //     });
+            expect(
+                reviews(stateBefore, action)
+            ).to.deep.equal(stateAfter);
+        });
 
-    // });
+    });
 
 });

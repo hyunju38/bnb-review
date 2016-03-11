@@ -5,6 +5,7 @@ import ProductInfo from '../components/ProductInfo';
 import ReviewList from '../components/ReviewList';
 import ReviewForm from '../components/ReviewForm';
 
+import addReview from '../actions/addReview';
 import selectProduct from '../actions/selectProduct';
 
 const DISPLAY_NAME = 'PRODUCT';
@@ -21,14 +22,18 @@ class Product extends Component {
 
     render(){
         const { getProduct, product, reviews } = this.props;
+        
+        const { addReview } = this.props;
+        
         return(
             <div>
                 <ProductInfo {...product} />
                 <ReviewList reviews={reviews}
                     getProduct={getProduct} />
-                <ReviewForm />
+                <ReviewForm addReview={addReview(product._id)} />
             </div>
         );
+        
     }
 }
 Product.displayName = DISPLAY_NAME;
@@ -45,6 +50,16 @@ const mapDispatchToProductProps = (dispatch) => {
     return {
         getProduct(productid, options = {}){
             dispatch(selectProduct(productid, options));
+        },
+        addReview(product_id){
+            return (comment, score) => {
+                dispatch(addReview({
+                    comment,
+                    score,
+                    product_id,
+                    user_id: 1
+                }));  
+            };
         }
     };
 };

@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
 import selectProduct from './actions/selectProduct';
+import addReview from './actions/addReview';
 import rootReducer from './reducers/index';
 import Product from './containers/Product';
 
@@ -37,7 +38,14 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 // let unsubscribe = store.subscribe(() => {
 //     console.log(store.getState());
 // });
-// store.dispatch(selectProduct(1));
+
+// store.dispatch(addReview({
+//     comment: 'test',
+//     score: 3,
+//     product_id: '56d94501ab9e222f7ada60e4',
+//     user_id: 1
+// }));
+
 // unsubscribe();
 
 ReactDOM.render(

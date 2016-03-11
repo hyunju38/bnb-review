@@ -51,7 +51,9 @@ const getWithReviews = (id, options = {}, callback) => {
                             items: reviews,
                             paginator: {
                                 curPage: mergedOptions.page,
-                                totalPage: Math.ceil(count / mergedOptions.size)
+                                totalPage: Math.ceil(count / mergedOptions.size),
+                                size: mergedOptions.size,
+                                itemCount: count
                             }
                         };
 

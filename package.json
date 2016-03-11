@@ -60,6 +60,8 @@
     "body-parser": "^1.15.0",
     "bootstrap-sass": "^3.3.6",
     "express": "^4.13.4",
+    "fetch-it": "^0.1.0",
+    "isomorphic-fetch": "^2.2.1",
     "jquery": "^2.2.1",
     "mongodb": "^2.1.7",
     "react": "^0.14.6",
