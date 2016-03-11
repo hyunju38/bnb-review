@@ -4,6 +4,22 @@ import model from '../models/Product';
 
 let router = express.Router();
 
+router.route('/')
+    .get((request, response) => {
+        const page = +request.query.page || 1;
+        model.getList(page, (error, productList) => {
+            if (error) {
+                return response.status(503).json({
+                    error: true
+                });
+            }
+            
+            response.status(200).json({
+                data: productList
+            });
+        });
+    });
+
 router.route('/:id')
     .get((request, response) => {
         const options = {
