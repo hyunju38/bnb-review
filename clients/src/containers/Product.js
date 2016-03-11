@@ -1,10 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
+import ProductList from '../components/ProductList';
 import ProductInfo from '../components/ProductInfo';
 import ReviewList from '../components/ReviewList';
 import ReviewForm from '../components/ReviewForm';
 
+import fetchProductList from '../actions/fetchProductList';
 import addReview from '../actions/addReview';
 import selectProduct from '../actions/selectProduct';
 
@@ -14,10 +16,12 @@ const SELECTED_PRODUCT_ID = 1;
 class Product extends Component {
 
     componentDidMount(){
-        const { getProduct } = this.props;
+        const { getProduct, fetchProductList } = this.props;
         getProduct('56d94501ab9e222f7ada60e4', {
             page: 1
         });
+
+        fetchProductList();
     }
 
     render(){
@@ -25,8 +29,11 @@ class Product extends Component {
         
         const { addReview } = this.props;
         
+        const { products, fetchProductList } = this.props;
+        
         return(
             <div>
+                <ProductList fetchProductList={fetchProductList} products={products} />
                 <ProductInfo {...product} />
                 <ReviewList reviews={reviews}
                     getProduct={getProduct} />
@@ -41,6 +48,7 @@ Product.displayName = DISPLAY_NAME;
 const mapStateToProductProps = (state) => {
     const product = state.selectedProduct.product || {};
     return {
+        products: state.products,
         product,
         reviews: product.reviews || {}
     };
@@ -48,6 +56,9 @@ const mapStateToProductProps = (state) => {
 
 const mapDispatchToProductProps = (dispatch) => {
     return {
+        fetchProductList(page = 1){
+            dispatch(fetchProductList(page));  
+        },
         getProduct(productid, options = {}){
             dispatch(selectProduct(productid, options));
         },
