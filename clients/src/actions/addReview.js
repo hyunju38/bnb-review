@@ -21,8 +21,6 @@ const addReview = (reviewData = {}, options = {}) => {
         
         const mergedOptions = Object.assign({}, options, requriedOptions);
         
-        console.log('API_SERVER_URL', API_SERVER_URL);
-        
         return fetch(API_SERVER_URL, mergedOptions)
             .then(response => response.json())
             .then(json => dispatch({

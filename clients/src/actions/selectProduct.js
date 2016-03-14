@@ -18,7 +18,6 @@ const selectProduct = (id, options = {}) => {
         return fetch(`${API_SERVER_URL}/products/${id}?page=${modifiedOptions.page}&size=${modifiedOptions.size}`)
             .then(response => response.json())
             .then(json => {
-                console.log('json', json);
                 return dispatch({
                 type: 'SELECT_PRODUCT',
                 status: 'SUCCESS',
