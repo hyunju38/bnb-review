@@ -34,7 +34,10 @@ router.route('/:id')
                 });
             }
 
-            response.status(200).json({ data: product });
+            response.status(200).json({
+                status: 'success',
+                results: product
+            });
         });
     });
 

@@ -3,69 +3,52 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 
-import selectedProduct from '../../clients/src/actions/selectProduct';
+import selectProduct from '../../clients/src/actions/selectProduct';
 
 const middlewares = [ thunk ];
 const mockStore = configureMockStore(middlewares);
 
 const API_SERVER_URL = 'http://localhost:3000';
 
-describe('selectedProduct actions', () => {
-
-    const productDummy = {
-        '_id': 1,
-        'name': '룰루랄라',
-        'desc': '랄라라라라라라라라ㅏ라라랄라랄',
-        'reviews': [
-            {
-                '_id': 1,
-                'comment': 'something',
-                'score': 2,
-                'product_id': 3,
-                'user_id': 4
-            },
-            {
-                '_id': 2,
-                'comment': 'some..',
-                'score': 3,
-                'product_id': 4,
-                'user_id': 5
-            }
-        ]
-    };
+describe('selectProduct actions', () => {
 
     it('should create SELECT_PRODUCT with product data when getting product data has been done', (done) => {
 
         nock(API_SERVER_URL)
-            .get(`/products/${productDummy._id}`)
+            .get(/products/)
             .reply(200, {
-                data: productDummy
+                status: 'SUCCESS',
+                results: ['some data']
             });
 
         const expectedAction = [
             {
-                type: 'SELECT_PRODUCT'
+                type: 'SELECT_PRODUCT',
+                status: null
             },
             {
                 type: 'SELECT_PRODUCT',
                 status: 'SUCCESS',
-                product: productDummy
+                results: ['some data']
             }
         ];
 
         const store = mockStore({}, expectedAction, done);
-        store.dispatch(selectedProduct(productDummy._id));
+        store.dispatch(selectProduct('56d94501ab9e222f7ada60e4'));
 
     });
 
     it('should create SELECT_PRODUCT with error status when getting product data has been fail', (done) => {
 
         nock(API_SERVER_URL)
-            .get(`/products/${productDummy._id}`)
+            .get(/products/)
             .replyWithError('something awful happened');
 
         const expectedActions = [
-            { type: 'SELECT_PRODUCT' },
+            { 
+                type: 'SELECT_PRODUCT',
+                status: null 
+            },
             {
                 type: 'SELECT_PRODUCT',
                 status: 'ERROR'
@@ -73,7 +56,7 @@ describe('selectedProduct actions', () => {
         ];
 
         const store = mockStore({}, expectedActions, done);
-        store.dispatch(selectedProduct(productDummy._id));
+        store.dispatch(selectProduct('56d94501ab9e222f7ada60e4'));
 
     });
 

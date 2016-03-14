@@ -17,27 +17,31 @@ class Product extends Component {
 
     componentDidMount(){
         const { getProduct, fetchProductList } = this.props;
-        getProduct('56d94501ab9e222f7ada60e4', {
-            page: 1
-        });
+        // getProduct('56d94501ab9e222f7ada60e4', {
+        //     page: 1
+        // });
 
         fetchProductList();
     }
 
     render(){
-        const { getProduct, product, reviews } = this.props;
+        const { selectedProduct } = this.props;
         
         const { addReview } = this.props;
         
         const { products, fetchProductList } = this.props;
         
+        const { selectProduct } = this.props;
+        
         return(
             <div>
-                <ProductList fetchProductList={fetchProductList} products={products} />
-                <ProductInfo {...product} />
-                <ReviewList reviews={reviews}
-                    getProduct={getProduct} />
-                <ReviewForm addReview={addReview(product._id)} />
+                <ProductList products={products} 
+                    fetchProductList={fetchProductList} 
+                    selectProduct={selectProduct} />
+                <ProductInfo {...selectProduct} />
+                <ReviewList reviews={selectedProduct.reviews}
+                    getProduct={selectProduct} />
+                <ReviewForm addReview={addReview(selectedProduct._id)} />
             </div>
         );
         
@@ -46,11 +50,10 @@ class Product extends Component {
 Product.displayName = DISPLAY_NAME;
 
 const mapStateToProductProps = (state) => {
-    const product = state.selectedProduct.product || {};
+    // const product = state.selectedProduct.product || {};
     return {
         products: state.products,
-        product,
-        reviews: product.reviews || {}
+        selectedProduct: state.selectedProduct.results
     };
 };
 
@@ -59,8 +62,8 @@ const mapDispatchToProductProps = (dispatch) => {
         fetchProductList(page = 1){
             dispatch(fetchProductList(page));  
         },
-        getProduct(productid, options = {}){
-            dispatch(selectProduct(productid, options));
+        selectProduct(productid, options = {}){
+            return dispatch(selectProduct(productid, options));
         },
         addReview(product_id){
             return (comment, score) => {

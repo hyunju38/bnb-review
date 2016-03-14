@@ -4,7 +4,7 @@ import request from 'supertest';
 import mongodb from '../../server/libs/mongodb';
 import app from '../../server/app';
 
-describe('/products', () => {
+describe('products routes', () => {
 
     describe('GET', () => {
         before((done) => {
@@ -60,18 +60,13 @@ describe('/products', () => {
         
         it('Should returns reviews of product', (done) => {
             request(app)
-                .get('/products/56d94501ab9e222f7ada60e4')
-                .expect(/ve;lkanceq/, done);
-        });
-        
-        it('Should returns reviews of product', (done) => {
-            request(app)
                 .get('/products/56d94501ab9e222f7ada60e4?page=2')
-                .expect((response) => {
-                    if ( response.body.data.reviews.length > 0 ) {
+                .expect(response => {
+                    if ( response.body.results.reviews.length > 0 ) {
                         throw new Error("Reviews are empty on 2 Page");
                     }
                 })
+                .expect(/wkcn;lewfkmqwef/)
                 .end((error) => {
                     if (error) {
                         throw error;

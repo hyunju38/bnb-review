@@ -11,57 +11,86 @@ describe('SelectedProduct reducer', () => {
         it ('should set product', () => {
 
             const stateBefore = {
-                product: {}
+                status: null,
+                results: {
+                    name: '',
+                    desc: '',
+                    reviews: {
+                        paginator: {
+                            curPage: 1,
+                            totalPage: 1,
+                            size: 5,
+                            totalItem: 0
+                        },
+                        items: []
+                    }
+                }
             };
 
             const action = {
                 type: 'SELECT_PRODUCT',
                 status: 'SUCCESS',
-                product: {
+                results:  {
                     '_id': 1,
                     'name': '룰루랄라',
                     'desc': '랄라라라라라라라라ㅏ라라랄라랄',
-                    'reviews': [
-                        {
-                            '_id': 1,
-                            'comment': 'something',
-                            'score': 2,
-                            'product_id': 3,
-                            'user_id': 4
+                    'reviews': {
+                        paginator: {
+                            curPage: 1,
+                            totalPage: 1,
+                            size: 5,
+                            totalItem: 2  
                         },
-                        {
-                            '_id': 2,
-                            'comment': 'some..',
-                            'score': 3,
-                            'product_id': 4,
-                            'user_id': 5
-                        }
-                    ]
+                        items: [
+                            {
+                                '_id': 1,
+                                'comment': 'something',
+                                'score': 2,
+                                'product_id': 3,
+                                'user_id': 4
+                            },
+                            {
+                                '_id': 2,
+                                'comment': 'some..',
+                                'score': 3,
+                                'product_id': 4,
+                                'user_id': 5
+                            }
+                        ]
+                    }
                 }
             };
 
             const stateAfter = {
                 status: 'SUCCESS',
-                product: {
+                results:  {
                     '_id': 1,
                     'name': '룰루랄라',
                     'desc': '랄라라라라라라라라ㅏ라라랄라랄',
-                    'reviews': [
-                        {
-                            '_id': 1,
-                            'comment': 'something',
-                            'score': 2,
-                            'product_id': 3,
-                            'user_id': 4
+                    'reviews': {
+                        paginator: {
+                            curPage: 1,
+                            totalPage: 1,
+                            size: 5,
+                            totalItem: 2  
                         },
-                        {
-                            '_id': 2,
-                            'comment': 'some..',
-                            'score': 3,
-                            'product_id': 4,
-                            'user_id': 5
-                        }
-                    ]
+                        items: [
+                            {
+                                '_id': 1,
+                                'comment': 'something',
+                                'score': 2,
+                                'product_id': 3,
+                                'user_id': 4
+                            },
+                            {
+                                '_id': 2,
+                                'comment': 'some..',
+                                'score': 3,
+                                'product_id': 4,
+                                'user_id': 5
+                            }
+                        ]
+                    }
                 }
             };
 
@@ -76,7 +105,20 @@ describe('SelectedProduct reducer', () => {
         it ('should set only status', () => {
 
             const stateBefore = {
-                product: {}
+                status: null,
+                results: {
+                    name: '',
+                    desc: '',
+                    reviews: {
+                        paginator: {
+                            curPage: 1,
+                            totalPage: 1,
+                            size: 5,
+                            totalItem: 0
+                        },
+                        items: []
+                    }
+                }
             };
 
             const action = {
@@ -86,7 +128,19 @@ describe('SelectedProduct reducer', () => {
 
             const stateAfter = {
                 status: 'ERROR',
-                product: {}
+                results: {
+                    name: '',
+                    desc: '',
+                    reviews: {
+                        paginator: {
+                            curPage: 1,
+                            totalPage: 1,
+                            size: 5,
+                            totalItem: 0
+                        },
+                        items: []
+                    }
+                }
             };
 
             deepFreeze(stateBefore);
@@ -100,15 +154,42 @@ describe('SelectedProduct reducer', () => {
         it ('should not modify', () => {
 
             const stateBefore = {
-                product: {}
+                status: null,
+                results: {
+                    name: '',
+                    desc: '',
+                    reviews: {
+                        paginator: {
+                            curPage: 1,
+                            totalPage: 1,
+                            size: 5,
+                            totalItem: 0
+                        },
+                        items: []
+                    }
+                }
             };
 
             const action = {
-                type: 'SELECT_PRODUCT'
+                type: 'SELECT_PRODUCT',
+                status: null
             };
 
             const stateAfter = {
-                product: {}
+                status: null,
+                results: {
+                    name: '',
+                    desc: '',
+                    reviews: {
+                        paginator: {
+                            curPage: 1,
+                            totalPage: 1,
+                            size: 5,
+                            totalItem: 0
+                        },
+                        items: []
+                    }
+                }
             };
 
             deepFreeze(stateBefore);

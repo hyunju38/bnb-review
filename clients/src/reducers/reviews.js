@@ -13,8 +13,8 @@ const initState = {
 
 const paginator = (state = initState.response.paginator, action) => {
      switch (action.type) {
-        case 'SELECT_PRODUCT':
-            return action.product.reviews.paginator;
+        // case 'SELECT_PRODUCT':
+        //     return action.product.reviews.paginator;
         case 'ADD_REVIEW':
             return Object.assign({}, state, {
                 totalPage: Math.ceil(state.itemCount + 1 / state.size),
@@ -27,8 +27,8 @@ const paginator = (state = initState.response.paginator, action) => {
 
 const items = (state = initState.response.items, action) => {
     switch (action.type) {
-        case 'SELECT_PRODUCT':
-            return action.product.reviews.items;
+        // case 'SELECT_PRODUCT':
+        //     return action.product.reviews.items;
         case 'ADD_REVIEW':
             return [
                 ...state,
@@ -41,7 +41,7 @@ const items = (state = initState.response.items, action) => {
 
 const response = (state = initState.response, action) => {
     switch (action.type) {
-        case 'SELECT_PRODUCT':
+        // case 'SELECT_PRODUCT':
         case 'ADD_REVIEW':
             if (action.status !== 'SUCCESS') {
                 return state;
@@ -57,7 +57,7 @@ const response = (state = initState.response, action) => {
 
 const reviews = (state = initState, action) => {
     switch (action.type) {
-        case 'SELECT_PRODUCT':
+        // case 'SELECT_PRODUCT':
         case 'ADD_REVIEW':
             return Object.assign({}, state, {
                 status: action.status,

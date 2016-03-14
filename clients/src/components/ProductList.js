@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 
 const ProductList = ({
     products,
-    fetchProductList
+    fetchProductList,
+    selectProduct
 }) => {
-    console.log('products', products);
+    // console.log('products', products);
     const { items, paginator } = products.response;
     let previousClass =  paginator && paginator.curPage === 1 ? 'previous disabled' : 'previous';
     let nextClass = paginator && paginator.curPage === paginator.totalPage ? 'next disabled' : 'next'; 
@@ -14,7 +15,12 @@ const ProductList = ({
             <div className="list-group">
                 {
                     items.map(item =>
-                        <a className="list-group-item" href="#" key={item._id}>
+                        <a className="list-group-item" href="#" key={item._id}
+                            onClick={event => {
+                                event.preventDefault();
+                                selectProduct(item._id)
+                                    .then(result => console.log(result));
+                            }} >
                             <h4 className="list-group-item-heading">
                                 {item.name}
                             </h4>
