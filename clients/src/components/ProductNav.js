@@ -46,13 +46,7 @@ const ProductNav = ({
                                     <button type="submit" className="btn btn-success"
                                         onClick={event => {
                                             event.preventDefault();
-                                            signin(emailInput.value, passwordInput.value)
-                                                .then(result => {
-                                                    if (!result || !result.results || !result.results.token) {
-                                                        return false;
-                                                    }
-                                                    sessionStorage.setItem('token', result.results.token);
-                                                });
+                                            signin(emailInput.value, passwordInput.value);
                                         }} > {'Sign in'} </button>
                                 </form>
                         }

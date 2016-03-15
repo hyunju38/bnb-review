@@ -12,7 +12,7 @@ passport.use(new Strategy(
             if (error) {
                 return callback(error);
             }
-            
+            console.log('decoded', decoded);
             model.getUserByUsernameAndPassword(decoded.username, decoded.password, (error, user) => {
                 if (error) {
                     return callback(error);

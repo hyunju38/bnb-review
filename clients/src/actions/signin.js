@@ -23,6 +23,9 @@ const signin = (username, password) => {
                 if (json.status === 'ERROR') {
                     throw new Error('status is ERROR');
                 }
+
+                window.sessionStorage.setItem('token', json.results.token);
+                
                 return dispatch({
                     type: 'SIGNIN',
                     status: 'SUCCESS',

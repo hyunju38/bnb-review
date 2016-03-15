@@ -1,6 +1,6 @@
 const initState = {
     status: null,
-    response: {
+    results: {
         paginator: {
             curPage: 1,
             totalPage: 1,
@@ -11,7 +11,7 @@ const initState = {
     }
 };
 
-const paginator = (state = initState.response.paginator, action) => {
+const paginator = (state = initState.results.paginator, action) => {
      switch (action.type) {
         case 'ADD_REVIEW':
             return Object.assign({}, state, {
@@ -23,7 +23,7 @@ const paginator = (state = initState.response.paginator, action) => {
     }    
 };
 
-const items = (state = initState.response.items, action) => {
+const items = (state = initState.results.items, action) => {
     switch (action.type) {
         case 'ADD_REVIEW':
             return [
@@ -35,7 +35,7 @@ const items = (state = initState.response.items, action) => {
     }    
 };
 
-const response = (state = initState.response, action) => {
+const results = (state = initState.results, action) => {
     switch (action.type) {
         case 'ADD_REVIEW':
             if (action.status !== 'SUCCESS') {
@@ -55,7 +55,7 @@ const reviews = (state = initState, action) => {
         case 'ADD_REVIEW':
             return Object.assign({}, state, {
                 status: action.status,
-                response: response(state.response, action)
+                results: results(state.results, action)
             });
         default:
             return state;

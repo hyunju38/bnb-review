@@ -27,13 +27,13 @@ const addReview = (reviewData = {}, options = {}) => {
             .then(json => dispatch({
                 type: 'ADD_REVIEW',
                 status: 'SUCCESS',
-                review: json.data
+                results: json.results
             }))
-            .then(result => {
-                if (process.env.NODE_ENV !== 'test') {
-                    location.reload();
-                }
-            })
+            // .then(result => {
+            //     if (process.env.NODE_ENV !== 'test') {
+            //         location.reload();
+            //     }
+            // })
             .catch(error => dispatch({
                 type: 'ADD_REVIEW',
                 status: 'ERROR'

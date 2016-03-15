@@ -1,6 +1,6 @@
 const initState = {
     status: null,
-    response: {
+    results: {
         paginator: {
             curPage: 1,
             totalPage: 1,
@@ -11,25 +11,25 @@ const initState = {
     }
 };
 
-const paginator = (state = initState.response.paginator, action) => {
+const paginator = (state = initState.results.paginator, action) => {
     switch (action.type) {
         case 'FETCH_PRODUCT_LIST':
-            return action.products.paginator;
+            return action.results.paginator;
         default:
             return state;
     }
 }
 
-const items = (state = initState.response.items, action) => {
+const items = (state = initState.results.items, action) => {
     switch (action.type) {
         case 'FETCH_PRODUCT_LIST':
-            return action.products.items;
+            return action.results.items;
         default:
             return state;
     }
 };
 
-const response = (state = initState.response, action) => {
+const results = (state = initState.results, action) => {
     switch (action.type) {
         case 'FETCH_PRODUCT_LIST':
             if (action.status !== 'SUCCESS') {
@@ -49,7 +49,7 @@ const products = (state = initState, action) => {
         case 'FETCH_PRODUCT_LIST':
             return Object.assign({}, state, {
                 status: action.status,
-                response: response(state.response, action)
+                results: results(state.results, action)
             });
         default:
             return state;

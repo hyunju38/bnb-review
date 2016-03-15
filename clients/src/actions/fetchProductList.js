@@ -11,16 +11,19 @@ const fetchProductList = (page) => {
             status: null
         });
         
+        const token = window.sessionStorage.getItem('token');
+        
+        // template string don't work.. 
         return fetch(`${API_SERVER_URL}?page=${page}`, {
                 headers: {
-                    'Authorization': `Bearer ${window.sessionStorage.getItem('token')}`
+                    'Authorization': 'Bearer ' + token
                 }
             })
             .then(response => response.json())
             .then(json => dispatch({
                 type: 'FETCH_PRODUCT_LIST',
                 status: 'SUCCESS',
-                products: json.data 
+                results: json.results 
             }))
             .catch(error => dispatch({
                 type: 'FETCH_PRODUCT_LIST',

@@ -17,11 +17,13 @@ const SELECTED_PRODUCT_ID = 1;
 
 class Product extends Component {
 
-    // componentDidMount(){
-    //     const { getProduct, fetchProductList } = this.props;
+    componentDidMount(){
+        const { getProduct, fetchProductList, user } = this.props;
 
-    //     fetchProductList();
-    // }
+        if (user.status === 'SUCCESS') {
+            fetchProductList();   
+        }
+    }
 
     render(){
         const { selectedProduct, user } = this.props;
@@ -39,22 +41,34 @@ class Product extends Component {
                 <ProductNav signin={signin} signout={signout} user={user} />
                 {
                     user.status === 'SUCCESS' ?
-                        (
-                            <div>
-                                <ProductList products={products} 
-                                    fetchProductList={fetchProductList} 
-                                    selectProduct={selectProduct}
-                                    user={user} />
+                        <div className="row">
+                            <div className="col-xs-6 col-md-6">
                                 <ProductInfo {...selectProduct} />
-                                <ReviewList reviews={selectedProduct.reviews}
-                                    getProduct={selectProduct} />
+                            </div>
+                            <div className="col-xs-offset-6 col-md-offset-6 col-xs-6 col-md-6">
                                 <ReviewForm addReview={addReview(selectedProduct._id)} />
                             </div>
-                        )
+                        </div>
                         :
                         <p>
                             You should sign in
                         </p>
+                }
+                {
+                    user.status === 'SUCCESS' ?
+                        <div className="row">
+                            <div className="col-xs-6 col-md-6">
+                                <ProductList products={products} 
+                                        fetchProductList={fetchProductList} 
+                                        selectProduct={selectProduct} />
+                            </div>
+                            <div className="col-xs-offset-6 col-md-offset-6 col-xs-6 col-md-6">
+                                <ReviewList reviews={selectedProduct.reviews}
+                                            getProduct={selectProduct} />
+                            </div>
+                        </div>
+                        :
+                        ''
                 }
             </div>
         );
