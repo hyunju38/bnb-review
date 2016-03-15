@@ -42,6 +42,7 @@ router.route('/:id')
                         message: 'error...'
                     }
                 });
+                return false;
             }
             
             response.status(200).json({

@@ -28,7 +28,7 @@ const signin = (username, password) => {
                 type: 'SIGNIN',
                 status: 'ERROR'
             }));
-    }
+    };
 };
 
 export default signin;

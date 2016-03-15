@@ -71,12 +71,15 @@ const getUserByUsernameAndPassword = (username, password, callback) => {
         .findOne({ username }, (error, user) => {
             if (error) {
                 callback(error);
+                return false;
             }
             if (!user) {
-                callback(error);
+                callback(new Error('test..'));
+                return false;
             }
             if (user.password !== password) {
-                callback(error);
+                callback(new Error('test..'));
+                return false;
             }
             
             const token = jwt.sign({ username, password }, 'test');

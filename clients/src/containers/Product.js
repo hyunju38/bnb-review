@@ -7,6 +7,7 @@ import ProductInfo from '../components/ProductInfo';
 import ReviewList from '../components/ReviewList';
 import ReviewForm from '../components/ReviewForm';
 
+import signin from '../actions/signin';
 import fetchProductList from '../actions/fetchProductList';
 import addReview from '../actions/addReview';
 import selectProduct from '../actions/selectProduct';
@@ -34,9 +35,11 @@ class Product extends Component {
         
         const { selectProduct } = this.props;
         
+        const { signin } = this.props;
+        
         return(
             <div>
-                <ProductNav />
+                <ProductNav signin={signin} />
                 <ProductList products={products} 
                     fetchProductList={fetchProductList} 
                     selectProduct={selectProduct} />
@@ -46,7 +49,7 @@ class Product extends Component {
                 <ReviewForm addReview={addReview(selectedProduct._id)} />
             </div>
         );
-        
+
     }
 }
 Product.displayName = DISPLAY_NAME;
@@ -55,7 +58,8 @@ const mapStateToProductProps = (state) => {
     // const product = state.selectedProduct.product || {};
     return {
         products: state.products,
-        selectedProduct: state.selectedProduct.results
+        selectedProduct: state.selectedProduct.results,
+        user: state.user
     };
 };
 
@@ -76,6 +80,9 @@ const mapDispatchToProductProps = (dispatch) => {
                     user_id: 1
                 }));  
             };
+        },
+        signin(username, password){
+            return dispatch(signin(username, password));
         }
     };
 };

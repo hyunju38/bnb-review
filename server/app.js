@@ -26,13 +26,14 @@ app.use('/reviews', reviews);
 app.get('/', (request, response) => {
   response.sendFile('./index.html');
 });
-// passport.authenticate('basic', { session: false }), 
-app.post('/signin', (request, response) => {
-    response.json({
-        status: 'SUCCESS',
-        results: request.user
-    });
-});
+
+// // passport.authenticate('basic', { session: false }), 
+// app.post('/signin', (request, response) => {
+//     response.json({
+//         status: 'SUCCESS',
+//         results: request.user
+//     });
+// });
 
 // app.get('/me', passport.authenticate('bearer', { session: false }), (request, response) => {
 //     // console.log('user', request.user);

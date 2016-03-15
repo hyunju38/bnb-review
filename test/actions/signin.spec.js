@@ -12,7 +12,7 @@ const mockStore = configureMockStore(middlewares);
 const API_SERVER_URL = 'http://localhost:3000';
 
 describe('signin actions', () => {
-    
+
     const initState = {
         status: null,
         response: {}
@@ -48,6 +48,7 @@ describe('signin actions', () => {
     });
 
     it('should create SIGNIN action with an error', (done) => {
+
         nock(API_SERVER_URL)
             .post('/signin', {
                 username: 'test',
@@ -68,6 +69,7 @@ describe('signin actions', () => {
         
         const store = mockStore(initState, expectedAction, done);
         store.dispatch(signin('test', 'test'));
+
     });
 
 });

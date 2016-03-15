@@ -15,7 +15,16 @@ router.route('/signin')
         }
         
         model.getUserByUsernameAndPassword(username, password, (error, result) => {
-            // console.log('result:', result);
+            if (error) {
+                response.status(503).json({
+                    status: 'ERROR',
+                    resutls: {
+                        message: 'error...'
+                    }
+                });
+                return false;
+            }
+            
             response.status(201).json({
                 status: 'success',
                 results: result
