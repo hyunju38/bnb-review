@@ -5,7 +5,6 @@ const ProductList = ({
     fetchProductList,
     selectProduct
 }) => {
-    // console.log('products', products);
     const { items, paginator } = products.response;
     let previousClass =  paginator && paginator.curPage === 1 ? 'previous disabled' : 'previous';
     let nextClass = paginator && paginator.curPage === paginator.totalPage ? 'next disabled' : 'next'; 

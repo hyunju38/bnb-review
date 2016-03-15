@@ -18,9 +18,11 @@ const SELECTED_PRODUCT_ID = 1;
 class Product extends Component {
 
     componentDidMount(){
-        const { getProduct, fetchProductList } = this.props;
+        const { getProduct, fetchProductList, user } = this.props;
 
-        fetchProductList();
+        if (user.status === 'SUCCESS') {
+            fetchProductList();   
+        }
     }
 
     render(){

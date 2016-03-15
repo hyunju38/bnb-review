@@ -1,13 +1,14 @@
 import express from 'express';
 
+import passport from '../libs/passport';
 import model from '../models/Product';
 
 let router = express.Router();
 
 router.route('/')
-    .get((request, response) => {
+    .get(passport.authenticate('bearer', { session: false }), (request, response) => {
         const page = +request.query.page || 1;
-        model.getList(page, (error, productList) => {
+        model.getList(page, (error, products) => {
             if (error) {
                 return response.status(503).json({
                     error: true
@@ -15,13 +16,14 @@ router.route('/')
             }
             
             response.status(200).json({
-                data: productList
+                status: 'SUCCESS',
+                results: products
             });
         });
     });
 
 router.route('/:id')
-    .get((request, response) => {
+    .get(passport.authenticate('bearer', { session: false }), (request, response) => {
         const options = {
             page: +request.query.page || 1,
             size: +request.query.size || 5

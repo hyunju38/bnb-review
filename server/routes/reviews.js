@@ -1,12 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 
+import passport from '../libs/passport';
 import model from '../models/Review';
 
 let router = express.Router();
 
 router.route('/')
-    .post(bodyParser.json(), (request, response) => {
+    .post(passport.authenticate('bearer', { session: false }), bodyParser.json(), (request, response) => {
         
         const newReview = request.body;
 

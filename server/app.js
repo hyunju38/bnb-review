@@ -24,7 +24,12 @@ app.use('/products', products);
 app.use('/reviews', reviews);
 
 app.get('/', (request, response) => {
-  response.sendFile('./index.html');
+    response.sendFile('./index.html');
 });
+
+// app.get('/test', passport.authenticate('bearer', { session: false }), (request, response) => {
+//     console.log('user', request.user);
+//     response.send('..');
+// });
 
 export default app;

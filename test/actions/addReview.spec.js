@@ -26,7 +26,7 @@ describe('addReview actions', () => {
     };
 
     it('should create ADD_REVIEW action', (done) => {
-
+        
         nock(API_SERVER_URL)
             .post('/reviews', {
                 score: 3,

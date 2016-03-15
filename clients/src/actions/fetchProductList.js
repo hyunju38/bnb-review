@@ -11,7 +11,11 @@ const fetchProductList = (page) => {
             status: null
         });
         
-        return fetch(`${API_SERVER_URL}?page=${page}`)
+        return fetch(`${API_SERVER_URL}?page=${page}`, {
+                headers: {
+                    'Authorization': `Bearer ${window.sessionStorage.getItem('token')}`
+                }
+            })
             .then(response => response.json())
             .then(json => dispatch({
                 type: 'FETCH_PRODUCT_LIST',

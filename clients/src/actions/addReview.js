@@ -15,7 +15,8 @@ const addReview = (reviewData = {}, options = {}) => {
             method: 'POST',
             body: JSON.stringify(reviewData),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${window.sessionStorage.getItem('token')}`
             }
         };
         
