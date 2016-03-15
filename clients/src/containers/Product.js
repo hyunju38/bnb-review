@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
+import ProductNav from '../components/ProductNav';
 import ProductList from '../components/ProductList';
 import ProductInfo from '../components/ProductInfo';
 import ReviewList from '../components/ReviewList';
@@ -35,6 +36,7 @@ class Product extends Component {
         
         return(
             <div>
+                <ProductNav />
                 <ProductList products={products} 
                     fetchProductList={fetchProductList} 
                     selectProduct={selectProduct} />
