@@ -19,11 +19,16 @@ const signin = (username, password) => {
                 }
             })
             .then(response => response.json())
-            .then(json => dispatch({
-                type: 'SIGNIN',
-                status: 'SUCCESS',
-                results: json.results
-            }))
+            .then(json => {
+                if (json.status === 'ERROR') {
+                    throw new Error('status is ERROR');
+                }
+                return dispatch({
+                    type: 'SIGNIN',
+                    status: 'SUCCESS',
+                    results: json.results
+                });
+            })
             .catch(error => dispatch({
                 type: 'SIGNIN',
                 status: 'ERROR'

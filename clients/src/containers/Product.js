@@ -24,7 +24,7 @@ class Product extends Component {
     }
 
     render(){
-        const { selectedProduct } = this.props;
+        const { selectedProduct, user } = this.props;
 
         const { addReview } = this.props;
 
@@ -36,14 +36,25 @@ class Product extends Component {
 
         return(
             <div>
-                <ProductNav signin={signin} />
-                <ProductList products={products} 
-                    fetchProductList={fetchProductList} 
-                    selectProduct={selectProduct} />
-                <ProductInfo {...selectProduct} />
-                <ReviewList reviews={selectedProduct.reviews}
-                    getProduct={selectProduct} />
-                <ReviewForm addReview={addReview(selectedProduct._id)} />
+                <ProductNav signin={signin} user={user} />
+                {
+                    user.status === 'SUCCESS' ?
+                        (
+                            <div>
+                                <ProductList products={products} 
+                                    fetchProductList={fetchProductList} 
+                                    selectProduct={selectProduct} />
+                                <ProductInfo {...selectProduct} />
+                                <ReviewList reviews={selectedProduct.reviews}
+                                    getProduct={selectProduct} />
+                                <ReviewForm addReview={addReview(selectedProduct._id)} />
+                            </div>
+                        )
+                        :
+                        <p>
+                            You should sign in
+                        </p>
+                }
             </div>
         );
 
