@@ -15,6 +15,11 @@ const user = (state = initState, action) => {
                 status: action.status,
                 results: action.results
             });
+        case 'SIGNOUT':
+            return {
+                status: action.status,
+                results: {}
+            };
         default:
             return state;
     }

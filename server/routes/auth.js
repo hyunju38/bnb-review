@@ -31,4 +31,30 @@ router.route('/signin')
         });
     });
 
+// router.route('/signout')
+//     .post((request, response) => {
+        
+//         response.status(201).json({
+//             status: 'success',
+//             results: result
+//         });
+        
+//         // model.getUserByUsernameAndPassword(username, password, (error, result) => {
+//         //     if (error) {
+//         //         response.status(503).json({
+//         //             status: 'ERROR',
+//         //             resutls: {
+//         //                 message: 'error...'
+//         //             }
+//         //         });
+//         //         return false;
+//         //     }
+            
+//         //     response.status(201).json({
+//         //         status: 'success',
+//         //         results: result
+//         //     });
+//         // });
+//     });
+
 export default router;

@@ -4,6 +4,7 @@ const DISPLAY_NAME = 'PRODUCT_NAV';
 
 const ProductNav = ({
     signin,
+    signout,
     user
 }) => {
     let emailInput, passwordInput;
@@ -23,7 +24,15 @@ const ProductNav = ({
                     <div id="navbar" className="navbar-collapse collapse">
                         {
                             user.status === 'SUCCESS' ?
-                                <p className="navbar-text navbar-right">{`Hi, ${user.results.username}`}</p> 
+                                <p className="navbar-text navbar-right">
+                                    {`Hi, ${user.results.username}`}
+                                    <button type="button" className="btn btn-link"
+                                        onClick={event => {
+                                            event.preventDefault();
+                                            signout();
+                                            sessionStorage.removeItem('token');
+                                        }} > {'Sign out'} </button>
+                                </p> 
                                 :
                                 <form className="signin-form navbar-form navbar-right" method="post" action="/signin">
                                     <div className="form-group">

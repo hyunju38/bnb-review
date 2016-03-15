@@ -32,11 +32,11 @@ class Product extends Component {
 
         const { selectProduct } = this.props;
 
-        const { signin } = this.props;
+        const { signin, signout } = this.props;
 
         return(
             <div>
-                <ProductNav signin={signin} user={user} />
+                <ProductNav signin={signin} signout={signout} user={user} />
                 {
                     user.status === 'SUCCESS' ?
                         (
@@ -90,6 +90,12 @@ const mapDispatchToProductProps = (dispatch) => {
         },
         signin(username, password){
             return dispatch(signin(username, password));
+        },
+        signout(){
+            return dispatch({
+                type: 'SIGNOUT',
+                status: null
+            });
         }
     };
 };
