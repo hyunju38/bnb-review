@@ -10,9 +10,6 @@ import addReview from './actions/addReview';
 import rootReducer from './reducers/index';
 import Product from './containers/Product';
 
-// import ProductInfo from './components/ProductInfo';
-// import ReviewList from './components/ReviewList';
-
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 // const selectedProduct = {

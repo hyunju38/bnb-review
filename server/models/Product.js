@@ -1,23 +1,14 @@
 import mongodb from '../libs/mongodb';
 import { Db, ObjectID } from 'mongodb';
 
-// const PAGE = 1;
 const SIZE = 5;
-// const SKIP = SIZE * (PAGE - 1);
-// const LIMIT = SIZE;
 
 const getSkip = (page = 1, size = 5) => {
     return  size * (page - 1);
 };
 
 const getList = (page = 1, callback) => {
-    // items: reviews,
-    // paginator: {
-    //     curPage: mergedOptions.page,
-    //     totalPage: Math.ceil(count / mergedOptions.size),
-    //     size: mergedOptions.size,
-    //     itemCount: count
-    // }
+
     const productCurosr = mongodb.getDb().collection('products');
     productCurosr.count((error, count) => {
         productCurosr.find({})

@@ -2,7 +2,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 
 import model from '../models/User';
-// import passport from '../libs/passport';
 
 let router = express.Router();
 

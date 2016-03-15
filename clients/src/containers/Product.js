@@ -19,24 +19,21 @@ class Product extends Component {
 
     componentDidMount(){
         const { getProduct, fetchProductList } = this.props;
-        // getProduct('56d94501ab9e222f7ada60e4', {
-        //     page: 1
-        // });
 
         fetchProductList();
     }
 
     render(){
         const { selectedProduct } = this.props;
-        
+
         const { addReview } = this.props;
-        
+
         const { products, fetchProductList } = this.props;
-        
+
         const { selectProduct } = this.props;
-        
+
         const { signin } = this.props;
-        
+
         return(
             <div>
                 <ProductNav signin={signin} />
@@ -55,7 +52,6 @@ class Product extends Component {
 Product.displayName = DISPLAY_NAME;
 
 const mapStateToProductProps = (state) => {
-    // const product = state.selectedProduct.product || {};
     return {
         products: state.products,
         selectedProduct: state.selectedProduct.results,

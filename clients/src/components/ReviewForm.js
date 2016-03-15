@@ -2,12 +2,6 @@ import React from 'react';
 
 const DISPLAY_NAME = 'REVIEW_FORM';
 
-// const formSubmit = (event) => {
-//     event.preventDefault();
-    
-//     addReview();
-// }
-
 const ReviewForm = ({
     addReview
 }) => {
