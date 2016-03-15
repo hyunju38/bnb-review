@@ -61,23 +61,35 @@ const getUser = (id, callback) => {
         });
 };
 
-const getUserByToken = (token, callback) => {
+const getUserByUsernameAndPassword = (username, password, callback) => {
     if (!(mongodb.getDb() instanceof Db)) {
         callback(new Error('You neet to connect database'));
     }
     
     mongodb.getDb()
         .collection('users')
-        .findOne({ token }, (error, user) => {
+        .findOne({ username }, (error, user) => {
             if (error) {
                 callback(error);
             }
-            callback(error, user);
+            if (!user) {
+                callback(error);
+            }
+            if (user.password !== password) {
+                callback(error);
+            }
+            
+            const token = jwt.sign({ username, password }, 'test');
+            
+            callback(error, {
+                username: username,
+                token
+            });
         });
 };
 
 export default {
     addUser,
     getUser,
-    getUserByToken
+    getUserByUsernameAndPassword
 };
