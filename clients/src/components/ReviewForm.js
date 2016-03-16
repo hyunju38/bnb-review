@@ -20,9 +20,13 @@ const ReviewForm = ({
                         type="number" className="form-control" min="1" max="5" />
                 </div>
                 <button type="submit" className="btn btn-default" 
-                    onClick={(event) => {
+                    onClick={event => {
                         event.preventDefault();
-                        addReview(commentInput.value, scoreInput.value);
+                        addReview(commentInput.value, scoreInput.value)
+                            .then(result => {
+                                commentInput.value = '';
+                                scoreInput.value = '';
+                            });
                     }} >
                     {'Submit'}
                 </button>

@@ -81,7 +81,7 @@ const mapDispatchToProductProps = (dispatch) => {
         },
         addReview(product_id){
             return (comment, score) => {
-                dispatch(addReview({
+                return dispatch(addReview({
                     comment,
                     score,
                     product_id,

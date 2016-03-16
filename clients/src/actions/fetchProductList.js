@@ -23,7 +23,7 @@ const fetchProductList = (page) => {
             .then(json => dispatch({
                 type: 'FETCH_PRODUCT_LIST',
                 status: 'SUCCESS',
-                results: json.results 
+                results: json.results
             }))
             .catch(error => dispatch({
                 type: 'FETCH_PRODUCT_LIST',

@@ -7,18 +7,16 @@ import model from '../models/User';
 
 passport.use(new Strategy(
     (token, callback) => {
-        console.log('token', token);
         jwt.verify(token, 'test', (error, decoded) => {
             if (error) {
                 return callback(error);
             }
-            console.log('decoded', decoded);
+            
             model.getUserByUsernameAndPassword(decoded.username, decoded.password, (error, user) => {
                 if (error) {
                     return callback(error);
                 }
                 
-                console.log('user', user);
                 return callback(error, user);
             });
         });

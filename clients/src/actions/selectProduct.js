@@ -20,12 +20,11 @@ const selectProduct = (id, options = {}) => {
                 }
             })
             .then(response => response.json())
-            .then(json => {
-                return dispatch({
+            .then(json => dispatch({
                 type: 'SELECT_PRODUCT',
                 status: 'SUCCESS',
                 results: json.results
-            })})
+            }))
             .catch(error => dispatch({
                 type: 'SELECT_PRODUCT',
                 status: 'ERROR'

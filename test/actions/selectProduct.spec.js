@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import jwt from 'jsonwebtoken';
 import nock from 'nock';
 
 import selectProduct from '../../clients/src/actions/selectProduct';
@@ -12,9 +13,20 @@ const API_SERVER_URL = 'http://localhost:3000';
 
 describe('selectProduct actions', () => {
 
+    const testToken = jwt.sign({ 
+        username: 'test', 
+        password: 'test'
+    }, 'test');
+
     it('should create SELECT_PRODUCT with product data when getting product data has been done', (done) => {
 
-        nock(API_SERVER_URL)
+        window.sessionStorage.setItem('token', testToken);
+        
+        nock(API_SERVER_URL, {
+                reqheaders: {
+                    'Authorization': `Bearer ${testToken}`
+                }
+            })
             .get(/products/)
             .reply(200, {
                 status: 'SUCCESS',
@@ -40,7 +52,13 @@ describe('selectProduct actions', () => {
 
     it('should create SELECT_PRODUCT with error status when getting product data has been fail', (done) => {
 
-        nock(API_SERVER_URL)
+        window.sessionStorage.setItem('token', testToken);
+
+        nock(API_SERVER_URL, {
+                reqheaders: {
+                    'Authorization': `Bearer ${testToken}`
+                }
+            })
             .get(/products/)
             .replyWithError('something awful happened');
 

@@ -12,7 +12,7 @@ describe('products reducer', () => {
 
             const stateBefore = {
                 status: null,
-                response: {
+                results: {
                     paginator: {
                         curPage: 1,
                         totalPage: 1,
@@ -26,7 +26,7 @@ describe('products reducer', () => {
             const action = {
                 type: 'FETCH_PRODUCT_LIST',
                 status: 'SUCCESS',
-                products: {
+                results: {
                     paginator: {
                         curPage: 1,
                         totalPage: 1,
@@ -50,7 +50,7 @@ describe('products reducer', () => {
 
             const stateAfter = {
                 status: 'SUCCESS',
-                response: {
+                results: {
                     paginator: {
                         curPage: 1,
                         totalPage: 1,
@@ -84,7 +84,7 @@ describe('products reducer', () => {
 
             const stateBefore = {
                 status: null,
-                response: {
+                results: {
                     paginator: {
                         curPage: 1,
                         totalPage: 1,
@@ -102,7 +102,7 @@ describe('products reducer', () => {
 
             const stateAfter = {
                 status: 'ERROR',
-                response: {
+                results: {
                     paginator: {
                         curPage: 1,
                         totalPage: 1,
@@ -125,7 +125,7 @@ describe('products reducer', () => {
 
             const stateBefore = {
                 status: null,
-                response: {
+                results: {
                     paginator: {
                         curPage: 1,
                         totalPage: 1,
@@ -143,7 +143,7 @@ describe('products reducer', () => {
 
             const stateAfter = {
                 status: null,
-                response: {
+                results: {
                     paginator: {
                         curPage: 1,
                         totalPage: 1,
@@ -166,11 +166,11 @@ describe('products reducer', () => {
 
     // describe('ADD_REVIEW test code', () => {
 
-    //     it('should add review object to response', () => {
+    //     it('should add review object to results', () => {
             
     //         const stateBefore = {
     //             status: null,
-    //             response: {
+    //             results: {
     //                 paginator: {
     //                     curPage: 1,
     //                     totalPage: 1,
@@ -203,7 +203,7 @@ describe('products reducer', () => {
 
     //         const stateAfter = {
     //             status: 'SUCCESS',
-    //             response: {
+    //             results: {
     //                 paginator: {
     //                     curPage: 1,
     //                     totalPage: 2,
@@ -239,7 +239,7 @@ describe('products reducer', () => {
     //     it('should not modify if status is null', () => {
     //         const stateBefore = {
     //             status: null,
-    //             response: {
+    //             results: {
     //                 paginator: {
     //                     curPage: 1,
     //                     totalPage: 1,
@@ -265,7 +265,7 @@ describe('products reducer', () => {
 
     //         const stateAfter = {
     //             status: null,
-    //             response: {
+    //             results: {
     //                 paginator: {
     //                     curPage: 1,
     //                     totalPage: 1,
@@ -294,7 +294,7 @@ describe('products reducer', () => {
     //     it('should add status if you have an error', () => {
     //         const stateBefore = {
     //             status: null,
-    //             response: {
+    //             results: {
     //                 paginator: {
     //                     curPage: 1,
     //                     totalPage: 1,
@@ -320,7 +320,7 @@ describe('products reducer', () => {
 
     //         const stateAfter = {
     //             status: 'ERROR',
-    //             response: {
+    //             results: {
     //                 paginator: {
     //                     curPage: 1,
     //                     totalPage: 1,

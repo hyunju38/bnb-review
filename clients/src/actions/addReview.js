@@ -16,7 +16,7 @@ const addReview = (reviewData = {}, options = {}) => {
             body: JSON.stringify(reviewData),
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${window.sessionStorage.getItem('token')}`
+                'Authorization': 'Bearer ' + window.sessionStorage.getItem('token')
             }
         };
         
@@ -29,16 +29,11 @@ const addReview = (reviewData = {}, options = {}) => {
                 status: 'SUCCESS',
                 results: json.results
             }))
-            // .then(result => {
-            //     if (process.env.NODE_ENV !== 'test') {
-            //         location.reload();
-            //     }
-            // })
             .catch(error => dispatch({
                 type: 'ADD_REVIEW',
                 status: 'ERROR'
             }));
-       
+
     }
 };
 
