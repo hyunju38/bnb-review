@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run dev:server",
     "test": "NODE_ENV=test mocha",
-    "dev:server": "NODE_ENV=development babel-node devServer.js"
+    "dev:server": "NODE_ENV=development babel-node devServer.js",
+    "debug:server": "NODE_ENV=development babel-node --debug-brk devServer.js"
   },
   "keywords": [
     "react",
