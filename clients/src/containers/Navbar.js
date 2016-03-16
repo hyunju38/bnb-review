@@ -15,8 +15,8 @@ class Navbar extends Component {
         this.handleClickSignIn = this.handleClickSignIn.bind(this);
         this.handleClickSignOut = this.handleClickSignOut.bind(this);
         this._getUsername = this._getUsername.bind(this);
-        this._setInput = this._setInput.bind(this);
         this._isValidUser = this._isValidUser.bind(this);
+        this._setInput = this._setInput.bind(this);
     }
     
     handleClickSignIn(event){

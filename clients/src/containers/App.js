@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 // import ProductNav from '../components/ProductNav';
 import Navbar from './Navbar';
-// import ProductList from '../components/ProductList';
+import LeftContents from './LeftContents';
 // import ProductInfo from '../components/ProductInfo';
 // import ReviewList from '../components/ReviewList';
 // import ReviewForm from '../components/ReviewForm';
@@ -14,6 +14,15 @@ const App = () => {
     return(
         <div>
             <Navbar />
+            <div className="row">
+                <div className="col-md-4 col-xs-4">
+                    <LeftContents />
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-md-4 col-xs-4">
+                </div>
+            </div>
         </div>
     );
 };

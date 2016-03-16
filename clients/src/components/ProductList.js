@@ -1,65 +1,114 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import fetchProductList from '../actions/fetchProductList';
+import selectProduct from '../actions/selectProduct';
 
 class ProductList extends Component {
 
-    componentDidMount () {
-        const { fetchProductList, user } = this.props;
+    constructor(props){
+        super(props);
+        
+        this.handleClickSelectProduct = this.handleClickSelectProduct.bind(this);
+        this.handleClickPreviousPage = this.handleClickPreviousPage.bind(this);
+        this.handleClickNextPage = this.handleClickNextPage.bind(this);
+        
+        this._getPreviousClass = this._getPreviousClass.bind(this);
+        this._getNextClass = this._getNextClass.bind(this);
+        
+        this._closestByClass = this._closestByClass.bind(this);
+    }
 
-        if (user && user.status === 'SUCCESS') {
-            fetchProductList();   
+    componentDidMount(){
+        const { fetchProductList } = this.props;
+
+        fetchProductList();
+    }
+    
+    handleClickSelectProduct(event){
+        event.preventDefault();
+        
+        const { selectProduct } = this.props;
+        
+        let target = this._closestByClass(event.target, 'list-group-item');
+        
+        if (!target) {
+            return false;
+        }
+        
+        selectProduct(target.dataset['productId'])
+            .then(result => console.log(result));
+    }
+    
+    _closestByClass(element, className){
+        while (element && element !== document.body) {
+            if (element.classList.contains(className)) {
+                return element;
+            } else if (element.parentNode) {
+                element = element.parentNode;
+            } else {
+                return null;
+            }
         }
     }
     
-    render () {
-        const { fetchProductList, products, selectProduct } = this.props;
-        const { items, paginator } = products.results;
-        let previousClass =  paginator && paginator.curPage === 1 ? 'previous disabled' : 'previous';
-        let nextClass = paginator && paginator.curPage === paginator.totalPage ? 'next disabled' : 'next'; 
+    handleClickPreviousPage(event){
+        event.preventDefault();
+        
+        const { products, fetchProductList } = this.props;
+        const { paginator } = products.results;
+        
+        if (this._getPreviousClass(paginator).search('disabled') !== -1) {
+            return;
+        }
+        fetchProductList(paginator.curPage - 1);
+    }
+    
+    handleClickNextPage(event){
+        event.preventDefault();
+        
+        const { products, fetchProductList } = this.props;
+        const { paginator } = products.results;
+        
+        if (this._getNextClass(paginator).search('disabled') !== -1) {
+            return;
+        }
+        fetchProductList(paginator.curPage + 1);
+    }
+    
+    _getPreviousClass(){
+        const { paginator } = this.props.products.results;
+        return paginator && paginator.curPage > 1 ? 'previous' : 'previous disabled';
+    }
+    
+    _getNextClass(){
+        const { paginator } = this.props.products.results;
+        return paginator && paginator.curPage < paginator.totalPage ? 'next' : 'next disabled';
+    }
+    
+    render(){
+        const { items } = this.props.products.results;
         
         return(
-            <div className="product-list">
+            <div>
                 <div className="list-group">
                     {
                         items.map(item =>
-                            <a className="list-group-item" href="#" key={item._id}
-                                onClick={event => {
-                                    event.preventDefault();
-                                    selectProduct(item._id)
-                                        .then(result => console.log(result));
-                                }} >
-                                <h4 className="list-group-item-heading">
-                                    {item.name}
-                                </h4>
-                                <p className="list-group-item-text">
-                                    {item.desc}
-                                </p>
+                            <a className="list-group-item" href="#" key={item._id} 
+                                data-product-id={item._id} onClick={this.handleClickSelectProduct} >
+                                <h4 className="list-group-item-heading"> {item.name} </h4>
+                                <p className="list-group-item-text"> {item.desc} </p>
                             </a>
                         )
                     }
                 </div>
                 <nav>
                     <ul className="pager">
-                        <li className={previousClass}>
-                            <a href="#" onClick={event => {
-                                event.preventDefault();
-                                if (previousClass.search('disabled') !== -1) {
-                                    return;
-                                }
-                                fetchProductList(paginator.curPage - 1);
-                            }}>
-                                {'Previous'}
-                            </a>
+                        <li className={this._getPreviousClass()}>
+                            <a href="#" onClick={this.handleClickPreviousPage}> {'Previous'} </a>
                         </li>
-                        <li className={nextClass}>
-                            <a href="#" onClick={event => {
-                                event.preventDefault();
-                                if (nextClass.search('disabled') !== -1) {
-                                    return;
-                                }
-                                fetchProductList(paginator.curPage + 1);
-                            }}>
-                                {'Next'}
-                            </a>
+                        <li className={this._getNextClass()}>
+                            <a href="#" onClick={this.handleClickNextPage}> {'Next'} </a>
                         </li>
                     </ul>
                 </nav>
@@ -68,64 +117,24 @@ class ProductList extends Component {
     }
 }
 
-// const ProductList = ({
-//     products,
-//     fetchProductList,
-//     selectProduct
-// }) => {
-//     const { items, paginator } = products.response;
-//     let previousClass =  paginator && paginator.curPage === 1 ? 'previous disabled' : 'previous';
-//     let nextClass = paginator && paginator.curPage === paginator.totalPage ? 'next disabled' : 'next'; 
-    
-//     return(
-//         <div className="product-list">
-//             <div className="list-group">
-//                 {
-//                     items.map(item =>
-//                         <a className="list-group-item" href="#" key={item._id}
-//                             onClick={event => {
-//                                 event.preventDefault();
-//                                 selectProduct(item._id)
-//                                     .then(result => console.log(result));
-//                             }} >
-//                             <h4 className="list-group-item-heading">
-//                                 {item.name}
-//                             </h4>
-//                             <p className="list-group-item-text">
-//                                 {item.desc}
-//                             </p>
-//                         </a>
-//                     )
-//                 }
-//             </div>
-//             <nav>
-//                 <ul className="pager">
-//                     <li className={previousClass}>
-//                         <a href="#" onClick={event => {
-//                             event.preventDefault();
-//                             if (previousClass.search('disabled') !== -1) {
-//                                 return;
-//                             }
-//                             fetchProductList(paginator.curPage - 1);
-//                         }}>
-//                             {'Previous'}
-//                         </a>
-//                     </li>
-//                     <li className={nextClass}>
-//                         <a href="#" onClick={event => {
-//                             event.preventDefault();
-//                             if (nextClass.search('disabled') !== -1) {
-//                                 return;
-//                             }
-//                             fetchProductList(paginator.curPage + 1);
-//                         }}>
-//                             {'Next'}
-//                         </a>
-//                     </li>
-//                 </ul>
-//             </nav>
-//         </div>
-//     );
-// };
+const mapStateToProps = (state) => {
+    return {
+        products: state.products
+    };
+};
 
-export default ProductList;
+const mapDistpatchToProps = (dispatch) => {
+    return {
+         fetchProductList(page = 1){
+             return dispatch(fetchProductList(page));
+         },
+         selectProduct(productId, options = {}){
+             return dispatch(selectProduct(productId, options));
+         }
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDistpatchToProps
+)(ProductList);

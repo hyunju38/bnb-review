@@ -16,7 +16,7 @@ const selectProduct = (id, options = {}) => {
 
         return fetch(`${API_SERVER_URL}/products/${id}?page=${modifiedOptions.page}&size=${modifiedOptions.size}`, {
                 headers: {
-                    'Authorization': `Bearer ${window.sessionStorage.getItem('token')}`
+                    'Authorization': 'Bearer ' + window.sessionStorage.getItem('token')
                 }
             })
             .then(response => response.json())
