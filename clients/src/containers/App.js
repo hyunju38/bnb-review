@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Navbar from './Navbar';
 import ProductList from './ProductList';
 import ProductInfo from './ProductInfo';
+import Introduction from '../components/Introduction';
 import ReviewForm from '../components/ReviewForm';
 
 const DISPLAY_NAME = 'APP';
@@ -32,9 +33,7 @@ const App = ({
                         isValidUser(user) ?
                             <ProductInfo />
                             :
-                            <p>
-                                Please, sign in.
-                            </p>
+                            ''
                     }
                 </div>
                 <div className="col-md-4 col-xs-4">
@@ -43,6 +42,16 @@ const App = ({
                             <ReviewForm />
                             :
                             ''
+                    }
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-md-offset-2 col-md-8 col-xs-offset-2 col-xs-8">
+                    {
+                        isValidUser(user) ?
+                            ''
+                            :
+                            <Introduction />
                     }
                 </div>
             </div>
