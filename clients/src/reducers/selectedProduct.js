@@ -15,56 +15,8 @@ const initState = {
     }
 };
 
-// const paginator = (state = initState.results.reviews.paginator, action) => {
-//      switch (action.type) {
-//         case 'ADD_REVIEW':
-//             return Object.assign({}, state, {
-//                 curPage: 1,
-//                 totalPage: Math.ceil(state.itemCount + 1 / state.size),
-//                 itemCount: state.itemCount + 1
-//             });
-//         default:
-//             return state;
-//     }    
-// };
-
-// const items = (state = initState.results.reviews.items, action) => {
-//     switch (action.type) {
-//         case 'ADD_REVIEW':
-//             if (state.length === 5) {
-//                 state.pop();
-//             }
-            
-//             return [
-//                 action.results,
-//                 ...state
-//             ];
-//         default:
-//             return state;
-//     }
-// };
-
-// const reviews = (state = initState.results.reviews, action) => {
-//     switch (action.type) {
-//         case 'ADD_REVIEW':
-//             return Object.assign({}, state, {
-//                 paginator: paginator(state.paginator, action),
-//                 items: items(state.items, action)
-//             });
-//         default:
-//             return state;
-//     }
-// };
-
 const results = (state = initState.results, action) => {
     switch (action.type) {
-        // case 'ADD_REVIEW':
-        //     if (action.status !== 'SUCCESS') {
-        //         return state;
-        //     }
-        //     return Object.assign({}, state, {
-        //         reviews: reviews(state.reviews, action)
-        //     });
         case 'SELECT_PRODUCT':
             if (action.status !== 'SUCCESS') {
                 return state;

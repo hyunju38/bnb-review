@@ -79,7 +79,7 @@ describe('products routes', () => {
                         throw new Error("Reviews are empty on 2 Page");
                     }
                 })
-                .expect(/wkcn;lewfkmqwef/)
+                .expect(/comment/)
                 .end((error) => {
                     if (error) {
                         throw error;

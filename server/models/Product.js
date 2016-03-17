@@ -56,13 +56,14 @@ const getWithReviews = (id, options = {}, callback) => {
             const reviewsCursor = mongodb.getDb()
                                     .collection('reviews')
                                     .find({ product_id: product._id });
-                                
+
             reviewsCursor.count((error, count) => {
                 if (error) {
                     callback(error);
                 }
                 
-                reviewsCursor.skip(getSkip(mergedOptions.page, mergedOptions.size))
+                reviewsCursor.sort({created_at: -1})
+                    .skip(getSkip(mergedOptions.page, mergedOptions.size))
                     .limit(mergedOptions.size)
                     .toArray((error, reviews) => {
                         if (error) {

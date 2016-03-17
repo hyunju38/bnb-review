@@ -16,8 +16,9 @@ router.route('/')
             return false;
         }
         
-        console.log('user', request.user);
+        // console.log('user', request.user);
         newReview.user_id = request.user._id;
+        newReview.created_at = new Date();
         
         model.addReview(newReview, (error, review) => {
             if (error) {
