@@ -3,6 +3,8 @@ General
 - property를 받아 rendering만 하는 component는 anonymous function으로 만든다.
 - property를 만드는 component는 class로 만든다. (이하 container component)
 
+> User property는 component 전체적으로 사용하는 것이기 때문에 위에서 부터 뿌려줄까??
+
 
 Container Component
 -------------------

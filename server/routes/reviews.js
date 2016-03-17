@@ -15,8 +15,9 @@ router.route('/')
             response.sendStatus(400);
             return false;
         }
-
-        newReview.user_id = 1;
+        
+        console.log('user', request.user);
+        newReview.user_id = request.user._id;
         
         model.addReview(newReview, (error, review) => {
             if (error) {

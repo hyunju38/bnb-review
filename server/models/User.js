@@ -83,11 +83,9 @@ const getUserByUsernameAndPassword = (username, password, callback) => {
             }
             
             const token = jwt.sign({ username, password }, 'test');
+            user.token = token;
             
-            callback(error, {
-                username: username,
-                token
-            });
+            callback(error, user);
         });
 };
 

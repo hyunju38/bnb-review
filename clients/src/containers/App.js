@@ -1,26 +1,49 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-// import ProductNav from '../components/ProductNav';
 import Navbar from './Navbar';
-import LeftContents from './LeftContents';
-// import ProductInfo from '../components/ProductInfo';
-// import ReviewList from '../components/ReviewList';
-// import ReviewForm from '../components/ReviewForm';
+import ProductList from './ProductList';
+import ProductInfo from './ProductInfo';
+import ReviewForm from '../components/ReviewForm';
 
 const DISPLAY_NAME = 'APP';
 
-const App = () => {
+const isValidUser = (user) => {
+    return user.status === 'SUCCESS';
+};
+
+const App = ({
+    user
+}) => {
     return(
         <div>
             <Navbar />
             <div className="row">
                 <div className="col-md-4 col-xs-4">
-                    <LeftContents />
+                    {
+                        isValidUser(user) ?
+                            <ProductList />
+                            :
+                            ''
+                    }
                 </div>
-            </div>
-            <div className="row">
                 <div className="col-md-4 col-xs-4">
+                    {
+                        isValidUser(user) ?
+                            <ProductInfo />
+                            :
+                            <p>
+                                Please, sign in.
+                            </p>
+                    }
+                </div>
+                <div className="col-md-4 col-xs-4">
+                    {
+                        isValidUser(user) ?
+                            <ReviewForm />
+                            :
+                            ''
+                    }
                 </div>
             </div>
         </div>
@@ -28,47 +51,14 @@ const App = () => {
 };
 App.displayName = DISPLAY_NAME;
 
-export default App;
 
-// const mapStateToProductProps = (state) => {
-//     return {
-//         products: state.products,
-//         selectedProduct: state.selectedProduct.results,
-//         user: state.user
-//     };
-// };
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
+    };
+};
 
-// const mapDispatchToProductProps = (dispatch) => {
-//     return {
-//         fetchProductList(page = 1){
-//             dispatch(fetchProductList(page));  
-//         },
-//         selectProduct(productid, options = {}){
-//             return dispatch(selectProduct(productid, options));
-//         },
-//         addReview(product_id){
-//             return (comment, score) => {
-//                 dispatch(addReview({
-//                     comment,
-//                     score,
-//                     product_id,
-//                     user_id: 1
-//                 }));  
-//             };
-//         },
-//         signin(username, password){
-//             return dispatch(signin(username, password));
-//         },
-//         signout(){
-//             return dispatch({
-//                 type: 'SIGNOUT',
-//                 status: null
-//             });
-//         }
-//     };
-// };
-
-// export default connect(
-//     mapStateToProductProps,
-//     mapDispatchToProductProps
-// )(App);
+export default connect(
+    mapStateToProps,
+    null
+)(App);

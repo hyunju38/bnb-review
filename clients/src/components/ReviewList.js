@@ -4,11 +4,12 @@ const DISPLAY_NAME = 'DISPLAY_NAME';
 
 const ReviewList = ({
     reviews,
-    getProduct
+    previousClass,
+    nextClass,
+    onClickPreviousPage,
+    onClickNextPage
 }) => {
-    const { items, paginator } = reviews;
-    let previousClass =  paginator && paginator.curPage === 1 ? 'previous disabled' : 'previous';
-    let nextClass = paginator && paginator.curPage === paginator.totalPage ? 'next disabled' : 'next';    
+    const { items } = reviews;
 
     return(
         <div>
@@ -33,28 +34,12 @@ const ReviewList = ({
             <nav>
                 <ul className="pager">
                     <li className={previousClass}>
-                        <a href="#" onClick={event => {
-                            event.preventDefault();
-                            if (previousClass.search('disabled') !== -1) {
-                                return;
-                            }
-                            getProduct('56d94501ab9e222f7ada60e4', {
-                                page: paginator.curPage - 1
-                            });
-                        }}>
+                        <a href="#" onClick={onClickPreviousPage}>
                             {'Previous'}
                         </a>
                     </li>
                     <li className={nextClass}>
-                        <a href="#" onClick={event => {
-                            event.preventDefault();
-                            if (nextClass.search('disabled') !== -1) {
-                                return;
-                            }
-                            getProduct('56d94501ab9e222f7ada60e4', {
-                                page: paginator.curPage + 1
-                            });
-                        }}>
+                        <a href="#" onClick={onClickNextPage}>
                             {'Next'}
                         </a>
                     </li>

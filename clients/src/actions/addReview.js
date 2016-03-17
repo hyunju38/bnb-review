@@ -11,12 +11,14 @@ const addReview = (reviewData = {}, options = {}) => {
             status: null
         });
         
+        const token = window.sessionStorage.getItem('token');
+        
         const requriedOptions = {
             method: 'POST',
             body: JSON.stringify(reviewData),
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + window.sessionStorage.getItem('token')
+                'Authorization': 'Bearer ' + token
             }
         };
         
