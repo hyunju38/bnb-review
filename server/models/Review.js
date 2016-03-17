@@ -1,6 +1,23 @@
 import mongodb from '../libs/mongodb';
 import { Db, ObjectID } from 'mongodb';
 
+const removeReview = (id, callback) => {
+    if (!(mongodb.getDb() instanceof Db)) {
+        callback(new Error('You neet to connect database'));
+    }
+
+    mongodb.getDb()
+        .collection('reviews')
+        .deleteOne({
+            _id: ObjectID(id)
+        }, (error, result) => {
+            if (error) {
+                callback(error);
+            }
+            callback(error, result);
+        });
+};
+
 const addReview = (review, callback) => {
     if (!(mongodb.getDb() instanceof Db)) {
         callback(new Error('You neet to connect database'));
@@ -35,5 +52,6 @@ const addReview = (review, callback) => {
 };
 
 export default {
-    addReview   
+    addReview,
+    removeReview 
 };

@@ -11,6 +11,59 @@ describe('reviews routes', () => {
         username: 'test', 
         password: 'test' 
     }, 'test');
+    
+    let insertedId = '';
+    
+    describe('Removing a review', () => {
+        
+        before(done => {
+            mongodb.connect(() => {
+               done();
+            });
+        });
+        
+        beforeEach(done => {
+            mongodb.getDb()
+                .collection('reviews')
+                .insertOne({
+                    comment: 'this is test',
+                    score: '3',
+                    product_id: '1',
+                    user: {
+                        id: '1',
+                        username: 'test'
+                    }
+                }, (error, result) => {
+                    insertedId = result.insertedId;
+                    done();
+                });
+        });
+        
+        afterEach(done => {
+            mongodb.getDb()
+                .collection('reviews')
+                .deleteOne({
+                    comment: 'this is test'
+                }, (error, result) => {
+                    done();
+                });
+        });
+        
+        it('should return a 201 status code', (done) => {
+            request(app)
+                .del(`/reviews/${insertedId}`)
+                .set('Authorization', `Bearer ${testToken}`)
+                .expect(201, done); 
+        });
+        
+        it('should return SUCCESS status', (done) => {
+            request(app)
+                .del(`/reviews/${insertedId}`)
+                .set('Authorization', `Bearer ${testToken}`)
+                .expect(/success/i, done); 
+        });
+
+    });
 
     describe('Creating new review', () => {
         before(done => {

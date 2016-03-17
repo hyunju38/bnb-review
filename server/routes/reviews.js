@@ -37,5 +37,31 @@ router.route('/')
             });
         });
     });
+    
+router.route('/:id')
+    .delete(passport.authenticate('bearer', { session: false }), (request, response) => {
+        
+        const id = request.params.id;
+        
+        if (!id) {
+            response.sendStatus(400);
+            return false;
+        }
+        
+        model.removeReview(id, (error, result) => {
+            if (error) {
+                response.status(503).json({
+                    error: true
+                });
+                return false;
+            }
+
+            response.status(201).json({
+                status: 'SUCCESS',
+                results: result
+            });
+        });
+
+    });
 
 export default router;
