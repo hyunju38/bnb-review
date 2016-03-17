@@ -36,8 +36,7 @@ class ProductList extends Component {
             return false;
         }
         
-        selectProduct(target.dataset['productId'])
-            .then(result => console.log(result));
+        selectProduct(target.dataset['productId']);
     }
     
     _closestByClass(element, className){

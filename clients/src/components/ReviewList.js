@@ -17,14 +17,14 @@ const ReviewList = ({
                 {
                     items && items.map((item) => {
                         return(
-                            <a className="list-group-item" href="#" key={item._id} >
+                            <div className="list-group-item" key={item._id} >
                                 <h4 className="list-group-item-heading">
                                     {item.comment}
                                 </h4>
                                 <p className="list-group-item-text">
                                     {`${item.score} by ${item.user.username}`}
                                 </p>
-                            </a>
+                            </div>
                         );
                     })
                 }

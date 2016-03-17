@@ -51,6 +51,8 @@ const products = (state = initState, action) => {
                 status: action.status,
                 results: results(state.results, action)
             });
+        case 'SIGNOUT':
+            return initState;
         default:
             return state;
     }

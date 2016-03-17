@@ -32,22 +32,27 @@ const ReviewForm = ({
 }) => {
     return (
         <div>
-            <form action='/reviews'>
-                <div className="form-group">
-                    <label htmlFor="comment">{'Comment'}</label>
-                    <input id="comment" ref={setInputs('comment')} 
-                        type="text" className="form-control" />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="score">{'Score'}</label>
-                    <input id="score" ref={setInputs('score')}
-                        type="number" className="form-control" min="1" max="5" />
-                </div>
-                <button type="submit" className="btn btn-default" 
-                    onClick={onClickAddReview(product.results._id, addReview, selectProduct)} >
-                    {'Submit'}
-                </button>
-            </form>
+            {
+                product.status === 'SUCCESS' ?
+                    <form action='/reviews'>
+                        <div className="form-group">
+                            <label htmlFor="comment">{'Comment'}</label>
+                            <input id="comment" ref={setInputs('comment')} 
+                                type="text" className="form-control" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="score">{'Score'}</label>
+                            <input id="score" ref={setInputs('score')}
+                                type="number" className="form-control" min="1" max="5" />
+                        </div>
+                        <button type="submit" className="btn btn-default" 
+                            onClick={onClickAddReview(product.results._id, addReview, selectProduct)} >
+                            {'Submit'}
+                        </button>
+                    </form>       
+                    :
+                    ''
+            }
         </div>
     );  
 };
