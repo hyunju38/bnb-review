@@ -57,12 +57,21 @@ class ProductInfo extends Component {
         
         return(
             <div>
-                <ProductDetail name={product.results.name} desc={product.results.desc}/>
-                <ReviewList reviews={product.results.reviews}
-                    previousClass={this._getPreviousClass()}
-                    nextClass={this._getNextClass()}
-                    onClickPreviousPage={this.handleClickPreviousPage}
-                    onClickNextPage={this.handleClickNextPage} />
+                {
+                    product.status === 'SUCCESS' ?
+                        <div>
+                            <ProductDetail name={product.results.name} desc={product.results.desc}/>
+                            <ReviewList reviews={product.results.reviews}
+                                previousClass={this._getPreviousClass()}
+                                nextClass={this._getNextClass()}
+                                onClickPreviousPage={this.handleClickPreviousPage}
+                                onClickNextPage={this.handleClickNextPage} />
+                        </div>
+                        :
+                        <div>
+                            <p> Choose your favorite bnb.</p>
+                        </div>
+                }
             </div>
         );
     }
