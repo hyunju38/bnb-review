@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import selectProduct from '../actions/selectProduct';
+import removeReview from '../actions/removeReview';
 
 import ProductDetail from '../components/ProductDetail';
 import ReviewList from '../components/ReviewList';
@@ -10,6 +11,8 @@ class ProductInfo extends Component {
 
     constructor(props){
         super(props);
+        
+        this._refreshProductWithReviewList = this._refreshProductWithReviewList.bind(this);
         
         this.handleClickPreviousPage = this.handleClickPreviousPage.bind(this);
         this.handleClickNextPage = this.handleClickNextPage.bind(this);
@@ -42,6 +45,13 @@ class ProductInfo extends Component {
         fetchProductWithReviewList(product.results._id, { page: paginator.curPage + 1 });
     }
     
+    _refreshProductWithReviewList(){
+        const { product, fetchProductWithReviewList } = this.props;
+        const { paginator } = product.results.reviews;
+        
+        fetchProductWithReviewList(product.results._id, { page: paginator.curPage });
+    }
+    
     _getPreviousClass(){
         const { paginator } = this.props.product.results.reviews;
         return paginator && paginator.curPage > 1 ? 'previous' : 'previous disabled';
@@ -53,7 +63,7 @@ class ProductInfo extends Component {
     }
     
     render(){
-        const { product } = this.props;
+        const { product, removeReview } = this.props;
         
         return(
             <div>
@@ -62,6 +72,8 @@ class ProductInfo extends Component {
                         <div>
                             <ProductDetail name={product.results.name} desc={product.results.desc}/>
                             <ReviewList reviews={product.results.reviews}
+                                removeReview={removeReview}
+                                refreshProductWithReviewList={this._refreshProductWithReviewList}
                                 previousClass={this._getPreviousClass()}
                                 nextClass={this._getNextClass()}
                                 onClickPreviousPage={this.handleClickPreviousPage}
@@ -87,6 +99,9 @@ const mapDistpatchToProps = (dispatch) => {
     return {
         fetchProductWithReviewList(productId, options){
             return dispatch(selectProduct(productId, options));
+        },
+        removeReview(reviewId){
+            return dispatch(removeReview(reviewId));
         }
     };
 };
