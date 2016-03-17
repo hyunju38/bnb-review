@@ -4,22 +4,22 @@ import thunk from 'redux-thunk';
 import jwt from 'jsonwebtoken';
 import nock from 'nock';
 
-import selectProduct from '../../clients/src/actions/selectProduct';
+import removeReview from '../../clients/src/actions/removeReview';
 
 const middlewares = [ thunk ];
 const mockStore = configureMockStore(middlewares);
 
 const API_SERVER_URL = 'http://localhost:3000';
 
-describe('selectProduct actions', () => {
+describe('removeReview actions', () => {
 
     const testToken = jwt.sign({ 
         username: 'test', 
         password: 'test'
     }, 'test');
 
-    it('should create SELECT_PRODUCT with product data when getting product data has been done', (done) => {
-
+    it('should create REMOVE_REVIEW action', (done) => {
+        
         window.sessionStorage.setItem('token', testToken);
         
         nock(API_SERVER_URL, {
@@ -27,54 +27,54 @@ describe('selectProduct actions', () => {
                     'Authorization': `Bearer ${testToken}`
                 }
             })
-            .get(/products/)
-            .reply(200, {
+            .delete(/reviews/)
+            .reply(201, {
                 status: 'SUCCESS',
-                results: ['some data']
+                results: ['some review']
             });
 
         const expectedAction = [
             {
-                type: 'SELECT_PRODUCT',
+                type: 'REMOVE_REVIEW',
                 status: null
             },
             {
-                type: 'SELECT_PRODUCT',
+                type: 'REMOVE_REVIEW',
                 status: 'SUCCESS',
-                results: ['some data']
+                results: ['some review']
             }
         ];
 
         const store = mockStore({}, expectedAction, done);
-        store.dispatch(selectProduct('56d94501ab9e222f7ada60e4'));
+        store.dispatch(removeReview('test'));
 
     });
-
-    it('should create SELECT_PRODUCT with error status when getting product data has been fail', (done) => {
-
+    
+    it('should create REMOVE_REVIEW action with error', (done) => {
+        
         window.sessionStorage.setItem('token', testToken);
-
+        
         nock(API_SERVER_URL, {
                 reqheaders: {
                     'Authorization': `Bearer ${testToken}`
                 }
             })
-            .get(/products/)
+            .delete(/reviews/)
             .replyWithError('something awful happened');
 
-        const expectedActions = [
-            { 
-                type: 'SELECT_PRODUCT',
-                status: null 
+        const expectedAction = [
+            {
+                type: 'REMOVE_REVIEW',
+                status: null
             },
             {
-                type: 'SELECT_PRODUCT',
+                type: 'REMOVE_REVIEW',
                 status: 'ERROR'
             }
         ];
 
-        const store = mockStore({}, expectedActions, done);
-        store.dispatch(selectProduct('56d94501ab9e222f7ada60e4'));
+        const store = mockStore({}, expectedAction, done);
+        store.dispatch(removeReview('test'));
 
     });
 

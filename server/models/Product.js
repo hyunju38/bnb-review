@@ -1,10 +1,48 @@
 import mongodb from '../libs/mongodb';
 import { Db, ObjectID } from 'mongodb';
 
-const getWithReviews = (id, callback) => {
+const SIZE = 5;
+
+const getSkip = (page = 1, size = 5) => {
+    return  size * (page - 1);
+};
+
+const getList = (page = 1, callback) => {
+
+    const productCurosr = mongodb.getDb().collection('products');
+    productCurosr.count((error, count) => {
+        productCurosr.find({})
+            .skip((page - 1) * SIZE)
+            .limit(SIZE)
+            .toArray((error, products) => {
+                if (error) {
+                    callback(error);    
+                }
+                
+                callback(error, {
+                    items: products,
+                    paginator: {
+                        curPage: page,
+                        totalPage: Math.ceil(count / SIZE),
+                        size: SIZE,
+                        itemCount: count
+                    }
+                });
+            });
+    });
+};
+
+const getWithReviews = (id, options = {}, callback) => {
     if (!(mongodb.getDb() instanceof Db)) {
         callback(new Error('You need to connect database'));
     }
+    
+    const defaultOptions = {
+        page: 1,
+        size: 5
+    };
+    
+    const mergedOptions = Object.assign({}, defaultOptions, options);
 
     mongodb.getDb()
         .collection('products')
@@ -15,21 +53,40 @@ const getWithReviews = (id, callback) => {
                 callback(error);
             }
 
-            mongodb.getDb()
-                .collection('reviews')
-                .find({ product_id: product._id })
-                .toArray((error, reviews) => {
-                    if (error) {
-                        callback(error);
-                    }
+            const reviewsCursor = mongodb.getDb()
+                                    .collection('reviews')
+                                    .find({ product_id: product._id });
 
-                    product.reviews = reviews;
+            reviewsCursor.count((error, count) => {
+                if (error) {
+                    callback(error);
+                }
+                
+                reviewsCursor.sort({created_at: -1})
+                    .skip(getSkip(mergedOptions.page, mergedOptions.size))
+                    .limit(mergedOptions.size)
+                    .toArray((error, reviews) => {
+                        if (error) {
+                            callback(error);
+                        }
 
-                    callback(error, product);
-                });
+                        product.reviews = {
+                            items: reviews,
+                            paginator: {
+                                curPage: mergedOptions.page,
+                                totalPage: Math.ceil(count / mergedOptions.size),
+                                size: mergedOptions.size,
+                                itemCount: count
+                            }
+                        };
+
+                        callback(error, product);
+                    });
+            });
     });
 };
 
 export default {
+    getList,
     getWithReviews
 };

@@ -1,8 +1,8 @@
 import React from 'react';
 
-const DISPLAY_NAME = 'PRODUCT_INFO';
+const DISPLAY_NAME = 'PRODUCT_DETAIL';
 
-const ProductInfo = ({
+const ProductDetail = ({
     name, desc
 }) => {
     return(
@@ -12,6 +12,6 @@ const ProductInfo = ({
         </div>
     );
 };
-ProductInfo.displayName = DISPLAY_NAME;
+ProductDetail.displayName = DISPLAY_NAME;
 
-export default ProductInfo;
+export default ProductDetail;

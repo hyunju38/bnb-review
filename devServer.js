@@ -6,9 +6,9 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import app from './server/app';
 import mongodb from './server/libs/mongodb';
 import webpackConfigBuilder from './webpack.config';
-var webpackConfig = webpackConfigBuilder(process.env.NODE_ENV);
+const webpackConfig = webpackConfigBuilder(process.env.NODE_ENV);
 
-var isDev = process.env.NODE_ENV === 'development';
+const isDev = process.env.NODE_ENV === 'development' ? 'development' : 'production';
 
 if (isDev) {
   const compiler = webpack(webpackConfig);

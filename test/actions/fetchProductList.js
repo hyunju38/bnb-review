@@ -1,27 +1,41 @@
+
 import { expect } from 'chai';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import jwt from 'jsonwebtoken';
 import nock from 'nock';
 
-import selectProduct from '../../clients/src/actions/selectProduct';
+import fetchProductList from '../../clients/src/actions/fetchProductList';
 
 const middlewares = [ thunk ];
 const mockStore = configureMockStore(middlewares);
 
 const API_SERVER_URL = 'http://localhost:3000';
 
-describe('selectProduct actions', () => {
-
+describe('fetchProductList actions', () => {
+    
     const testToken = jwt.sign({ 
         username: 'test', 
         password: 'test'
     }, 'test');
+    
+    const initState = {
+        status: null,
+        results: {
+            paginator: {
+                curPage: 1,
+                totalPage: 1,
+                size: 5,
+                totalItem: 0
+            },
+            items: []
+        }
+    };
 
-    it('should create SELECT_PRODUCT with product data when getting product data has been done', (done) => {
-
-        window.sessionStorage.setItem('token', testToken);
+    it('should create FETCH_PRODUCT_LIST action', (done) => {
         
+        window.sessionStorage.setItem('token', testToken);
+
         nock(API_SERVER_URL, {
                 reqheaders: {
                     'Authorization': `Bearer ${testToken}`
@@ -30,52 +44,51 @@ describe('selectProduct actions', () => {
             .get(/products/)
             .reply(200, {
                 status: 'SUCCESS',
-                results: ['some data']
+                results: ['some products']
             });
 
         const expectedAction = [
             {
-                type: 'SELECT_PRODUCT',
+                type: 'FETCH_PRODUCT_LIST',
                 status: null
             },
             {
-                type: 'SELECT_PRODUCT',
+                type: 'FETCH_PRODUCT_LIST',
                 status: 'SUCCESS',
-                results: ['some data']
+                results: ['some products']
             }
         ];
 
-        const store = mockStore({}, expectedAction, done);
-        store.dispatch(selectProduct('56d94501ab9e222f7ada60e4'));
-
+        const store = mockStore(initState, expectedAction, done);
+        store.dispatch(fetchProductList());
+        
     });
 
-    it('should create SELECT_PRODUCT with error status when getting product data has been fail', (done) => {
-
+    it('should create FETCH_PRODUCT_LIST action with error', (done) => {
+        
         window.sessionStorage.setItem('token', testToken);
-
+        
         nock(API_SERVER_URL, {
                 reqheaders: {
                     'Authorization': `Bearer ${testToken}`
                 }
             })
-            .get(/products/)
+            .get('/products')
             .replyWithError('something awful happened');
 
-        const expectedActions = [
-            { 
-                type: 'SELECT_PRODUCT',
-                status: null 
+        const expectedAction = [
+            {
+                type: 'FETCH_PRODUCT_LIST',
+                status: null
             },
             {
-                type: 'SELECT_PRODUCT',
+                type: 'FETCH_PRODUCT_LIST',
                 status: 'ERROR'
             }
         ];
-
-        const store = mockStore({}, expectedActions, done);
-        store.dispatch(selectProduct('56d94501ab9e222f7ada60e4'));
-
+        
+        const store = mockStore(initState, expectedAction, done);
+        store.dispatch(fetchProductList());
     });
 
 });

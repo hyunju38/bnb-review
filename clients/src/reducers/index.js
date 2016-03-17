@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 
-import reviews from './reviews';
+import products from './products';
 import selectedProduct from './selectedProduct';
+import user from './user';
 
 const root = combineReducers({
-    reviews,
-    selectedProduct
+    products,
+    selectedProduct,
+    user
 });
 
 export default root;
